@@ -29,19 +29,21 @@ article {
 }
 
 #box {
-  position: relative;
-  left: -89px;
-  top: -69px;
   background-color: lightgreen;
+position: relative;
+right: 100px;
+bottom: 80px;
+  z-index: 999;
   height: 80px;
   width: 80px;
-  transform: rotate(-13.9deg);
+  transform: rotate(rad);
 }
 
 #plane {
   position: absolute;
+  z-index: 0;
   width: 0;
   height: 0;
-  border-left: 800px solid transparent;
+  border-left: 800px solid lightsalmon;
   border-bottom: 200px solid lightslategray;
 }

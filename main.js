@@ -2,42 +2,48 @@ import { box, plane } from "./nodes.js";
 import { handlesKeyDown, handlesKeyUp } from "./event.js";
 
 let planeHeight = 200;
-let boxAngle = -14.1;
-let boxLeft = -89;
-let boxTop = -69;
-
+let planeWidth = 800; //px
+let planeHypotenuse;
+let planeAngle;
+let boxBottom = 80;
+let boxRight = 100;
 
 export let key = {up: false, down: false};
 addEventListener("keydown", handlesKeyDown);
 addEventListener("keyup", handlesKeyUp);
 
 function render() {
-  ensuresPositionRatio();
+    planeHypotenuse = Math.sqrt(Math.pow(planeHeight, 2) + Math.pow(planeWidth, 2));
+    planeAngle = Math.asin((planeHeight / planeHypotenuse));
+    console.log(planeHeight)
 
+
+
+  maintainsPositionalRatio();
   requestAnimationFrame(render);
 }
 render();
 
-function ensuresPositionRatio() {
+function maintainsPositionalRatio() {
   if (key.up) {
     planeHeight += 1;
-    boxAngle += -0.0705;
-    boxTop += -0.4;
-    boxLeft += -0.4;
+    boxBottom += 0.5;
+    boxRight += -0.5;
   }
   if (key.down) {
     if (planeHeight >= 0) {
     planeHeight -= 1;
-    boxAngle -= -0.0705;
-    boxTop -= -0.4;
-    boxLeft -= -0.4;
+   
+    boxBottom -= -0.5;
+    boxRight -= -0.5;
 }
+    else {return;}
+
   }
   plane.style.borderBottomWidth = planeHeight.toString() + "px";
-  box.style.transform = "rotate(" + boxAngle.toString() + "deg)";
-  box.style.top = boxTop.toString() + "px";
-  box.style.left = boxLeft.toString() + "px";
+  box.style.transform = "rotate(" + -planeAngle.toString() + "rad)";
+box.style.bottom = boxBottom.toString() + "px";
+box.style.right = boxRight.toString() + "px";
 
 }
-
 
