@@ -1,0 +1,47 @@
+* {
+ /*  outline: solid 1px green; */
+}
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  background-color: gray;
+}
+
+main {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+article {
+  height: 600px;
+  width: 1000px;
+  background-color: black;
+  border-radius: 10px;;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+
+#box {
+  position: relative;
+  left: -89px;
+  top: -69px;
+  background-color: lightgreen;
+  height: 80px;
+  width: 80px;
+  transform: rotate(-13.9deg);
+}
+
+#plane {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 800px solid transparent;
+  border-bottom: 200px solid lightslategray;
+}
