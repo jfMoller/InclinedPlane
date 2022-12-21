@@ -51,11 +51,12 @@ bottom: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: -1px;
 }
 
 #fn {
   position: inherit;
-  height: 1000px;
+  height: 200px;
   width: 1px;
   background-color: red;
 }
@@ -63,32 +64,38 @@ bottom: 80px;
 #ff {
   position: inherit;
   height: 1px;
-width: 1000px;
+width: 200px;
   background-color: green;
 }
 
 #fg {
   position: inherit;
-  height: 1000px;
+  height: 200px;
   width: 1px;
   background-color: pink;
   transform: rotate(0.25rad);
 }
 
+:root {
+  --box_bottom: -3px;
+  --box_right: 3px;
+  --box_slide_bottom: -120px;
+  --box_slide_right: 2350px;
+}
+
 .box-animation {
-  position: relative;
   animation-name: box_slide;
-  animation-duration: 2s;
+  animation-duration: 20s;
   animation-delay: 0s;
-  animation-fill-mode: forwards;
+  animation-fill-mode:both;
 }
 @keyframes box_slide {
   from {
-    bottom: 0px;
-    right: 0px;
+    bottom: var(--box_bottom);
+    right: var(--box_right);
   }
-  to {
-    right: 30px;
-    right: 16px;
+  100%{
+    bottom: var(--box_slide_bottom);
+    right: var(--box_slide_right);
   }
 }
