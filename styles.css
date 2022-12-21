@@ -46,12 +46,10 @@ bottom: 80px;
   z-index: 999;
   height: 80px;
   width: 80px;
-  border-radius: 5px;
   transform: rotate(rad);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: -1px;
 }
 
 #fn {
@@ -81,12 +79,14 @@ width: 200px;
   --box_right: 3px;
   --box_slide_bottom: -120px;
   --box_slide_right: 2350px;
+  --box_velocity: 10s;
+  --animation_delay: 0s;
 }
 
 .box-animation {
   animation-name: box_slide;
-  animation-duration: 20s;
-  animation-delay: 0s;
+  animation-duration: var(--box_velocity);
+  animation-delay: var(--box_delay);
   animation-fill-mode:both;
 }
 @keyframes box_slide {

@@ -9,38 +9,53 @@ let boxBottom = -2;
 let boxRight = 2;
 let boxSlideBottom = -120;
 let boxSlideRight = 2350;
+let boxVelocity = 0;
+
+let animationDelay = 0;
 
 let mass = 10; //kg
 let mg = 9.82 * mass;
 let normalForce;
-let F1;
-let frictionForce = F1;
-let frictionNumber = F1 / normalForce;
+let f1;
+let frictionForce;
+let frictionNumber = 0.42; //random value, non material surface
 
 export let key = { up: false, down: false };
 addEventListener("keydown", handlesKeyDown);
 addEventListener("keyup", handlesKeyUp);
 
-box.addEventListener("click", () => {
+/* box.addEventListener("click", () => {
   box.setAttribute("class", "box-animation");
   setTimeout(() => {
     box.removeAttribute("class", "box-animation");
   }, 10000);
-});
+}); */
 
 function render() {
   planeHypotenuse = Math.sqrt(
     Math.pow(planeHeight, 2) + Math.pow(planeWidth, 2)
   );
   planeAngle = Math.asin(planeHeight / planeHypotenuse);
-/*   console.log(window.getComputedStyle(root).getPropertyValue("--box_slide_bottom"));
- */
+
+  //when non-moving
+  f1 = mg * Math.sin(planeAngle);
+  normalForce = mg * Math.cos(planeAngle);
+  frictionForce = frictionNumber * normalForce;
+
+  if (f1 > frictionForce) {
+    box.setAttribute("class", "box-animation");
+    boxVelocity -= planeAngle * 0.5;
+  } else {
+    box.removeAttribute("class", "box-animation");
+    boxVelocity = 100;
+  }
+
   maintainsGraphicalPosition();
   requestAnimationFrame(render);
 }
 render();
 
-function maintainsGraphicalPosition() {
+export function maintainsGraphicalPosition() {
   if (key.up) {
     if (planeHeight <= 500) {
       planeHeight += 5;
@@ -48,7 +63,6 @@ function maintainsGraphicalPosition() {
       boxRight += 0.16;
       boxSlideBottom += -Math.exp(2.776);
       boxSlideRight += Math.exp(0.77);
-      
     } else {
       return;
     }
@@ -73,4 +87,9 @@ function maintainsGraphicalPosition() {
 
   root.style.setProperty("--box_slide_bottom", boxSlideBottom + "px");
   root.style.setProperty("--box_slide_right", boxSlideRight + "px");
+  root.style.setProperty("--box_velocity", boxVelocity + "s");
+  root.style.setProperty("--animation_delay", animationDelay + "s");
 }
+
+/*   console.log(window.getComputedStyle(root).getPropertyValue("--box_slide_bottom"));
+ */
