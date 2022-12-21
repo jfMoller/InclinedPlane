@@ -28,22 +28,67 @@ article {
   flex-direction: column;
 }
 
-#box {
-  background-color: lightgreen;
-position: relative;
-right: 100px;
-bottom: 80px;
-  z-index: 999;
-  height: 80px;
-  width: 80px;
-  transform: rotate(rad);
-}
-
 #plane {
   position: absolute;
   z-index: 0;
   width: 0;
   height: 0;
-  border-left: 800px solid lightsalmon;
-  border-bottom: 200px solid lightslategray;
+  border-left: 800px solid transparent;
+  border-bottom: 300px solid lightslategray;
+}
+
+
+#box {
+  background-color: lightgreen;
+position: inherit;
+right: 100px;
+bottom: 80px;
+  z-index: 999;
+  height: 80px;
+  width: 80px;
+  border-radius: 5px;
+  transform: rotate(rad);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#fn {
+  position: inherit;
+  height: 1000px;
+  width: 1px;
+  background-color: red;
+}
+
+#ff {
+  position: inherit;
+  height: 1px;
+width: 1000px;
+  background-color: green;
+}
+
+#fg {
+  position: inherit;
+  height: 1000px;
+  width: 1px;
+  background-color: pink;
+  transform: rotate(0.25rad);
+}
+
+.box-animation {
+  position: relative;
+  animation-name: box_slide;
+  animation-duration: 2s;
+  animation-delay: 0s;
+  animation-fill-mode: forwards;
+}
+@keyframes box_slide {
+  from {
+    bottom: 0px;
+    right: 0px;
+  }
+  to {
+    right: 30px;
+    right: 16px;
+  }
 }
