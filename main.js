@@ -1,4 +1,4 @@
-import { root, box, plane } from "./nodes.js";
+import { root, box, plane, gravityVector, oppositeCathetus, normalVector } from "./nodes.js";
 import { handlesKeyDown, handlesKeyUp } from "./event.js";
 
 let planeHeight = 39;
@@ -50,6 +50,13 @@ function render() {
     boxVelocity = 100;
   }
 
+  //ratios for box-triangle
+  normalVector.style.height = ((planeWidth / 8) * 2).toString() + "px";
+
+  gravityVector.style.height = (190 + (planeHeight / 16) * 2).toString() + "px";
+
+  oppositeCathetus.style.width = (planeAngle * (parseFloat(gravityVector.style.height) / 2)).toString() + "px";
+
   maintainsGraphicalPosition();
   requestAnimationFrame(render);
 }
@@ -89,6 +96,9 @@ export function maintainsGraphicalPosition() {
   root.style.setProperty("--box_slide_right", boxSlideRight + "px");
   root.style.setProperty("--box_velocity", boxVelocity + "s");
   root.style.setProperty("--animation_delay", animationDelay + "s");
+
+  gravityVector.style.transform = "rotate(" + planeAngle.toString() + "rad)";
+
 }
 
 /*   console.log(window.getComputedStyle(root).getPropertyValue("--box_slide_bottom"));

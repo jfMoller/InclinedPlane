@@ -1,5 +1,5 @@
 * {
- /*  outline: solid 1px green; */
+/*   outline: solid 1px green; */
 }
 html {
   height: 100%;
@@ -37,6 +37,9 @@ article {
   border-bottom: 300px solid lightslategray;
 }
 
+.vector {
+  color: white;
+}
 
 #box {
   background-color: lightgreen;
@@ -56,22 +59,40 @@ bottom: 80px;
   position: inherit;
   height: 200px;
   width: 1px;
+  display: flex;
+justify-content: flex-end;
   background-color: red;
 }
 
 #ff {
   position: inherit;
+  display: flex;
   height: 1px;
 width: 200px;
+display: flex;
+justify-content: flex-end;
+  align-items: flex-end;
   background-color: green;
 }
 
 #fg {
   position: inherit;
-  height: 200px;
+  height: 300px;
   width: 1px;
-  background-color: pink;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  background-color: white;
   transform: rotate(0.25rad);
+}
+
+#mk {
+  position: inherit;
+  top: 200px;
+  width: 300px;
+  height: 1px;
+  background-color: green;
+  text-align: center;
 }
 
 :root {
