@@ -13,3 +13,7 @@ export let oppositeCathetus = document.querySelector("#mk");
 
 //metric displays
 export let angleValue = document.querySelector("#angle-text");
+export let fnValue = document.querySelector("#fn-text");
+export let f1Value = document.querySelector("#f1-text");
+export let fμValue = document.querySelector("#fμ-text");
+export let fgValue = document.querySelector("#fg-text");

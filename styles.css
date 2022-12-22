@@ -1,5 +1,7 @@
 * {
-  outline: solid 1px green;
+ /*  outline: solid 1px green; */
+  margin: 0;
+  padding: 0;
 }
 html {
   height: 100%;
@@ -37,18 +39,22 @@ article {
   width: 80%;
   height: 80%;
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .value-table {
 color: white;
-padding: 1rem;
-text-align: center;
+padding: 0.5rem;
+
 }
-th {
-  padding: 1rem;
+
+tbody {
+  text-align: left;
 }
+
+
 
 #plane {
   position: absolute;
@@ -77,15 +83,16 @@ bottom: 80px;
   justify-content: center;
 }
 
-#fn {
+#f1 {
   position: inherit;
-  height: 200px;
-  width: 1px;
   display: flex;
-justify-content: flex-end;
-  background-color: red;
+  height: 1px;
+width: 200px;
+display: flex;
+justify-content: flex-start;
+  align-items: flex-end;
+  background-color: transparent;
 }
-
 #ff {
   position: inherit;
   display: flex;
@@ -97,15 +104,43 @@ justify-content: flex-end;
   background-color: green;
 }
 
+#arrow-up {
+  position: relative;
+  display: flex;
+  bottom: 100px;
+  color:Red;
+}
+
+#fn {
+  position: inherit;
+  height: 200px;
+  width: 2px;
+  display: flex;
+justify-content: flex-end;
+  background-color: red;
+}
+
+
 #fg {
   position: inherit;
-  height: 300px;
+  height: 200px;
   width: 1px;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
   background-color: white;
   transform: rotate(0.25rad);
+}
+
+#f2 {
+  position: inherit;
+  display: flex;
+  height: 200px;
+width: 1px;
+display: flex;
+justify-content: flex-start;
+  align-items: flex-end;
+  background-color: transparent;
 }
 
 #mk {

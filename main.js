@@ -6,6 +6,10 @@ import {
   oppositeCathetus,
   normalVector,
   angleValue,
+  fnValue,
+  f1Value,
+  fμValue,
+  fgValue
 } from "./nodes.js";
 import { handlesKeyDown, handlesKeyUp } from "./event.js";
 
@@ -61,6 +65,10 @@ function render() {
 
   //metric displays
 angleValue.innerText = "θ = " + (57.296 * planeAngle).toFixed(2).toString() + "°";
+fnValue.innerText = normalForce.toFixed(2).toString() + " N";
+fμValue.innerText = frictionForce.toFixed(2).toString() + " N";
+fgValue.innerText = mg.toFixed(2).toString() + " N";
+f1Value.innerText = f1.toFixed(2).toString() + " N";
 
 
 

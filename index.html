@@ -6,48 +6,143 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/c06fb9eab3.js" crossorigin="anonymous"></script>
     <title>Document</title>
 </head>
 
 <body>
-    
+
     <main>
         <article>
             <div id="index-container">
                 <div class="value-table">
                     <table>
-                        <thead>
-                          <tr>
-                            <th>Normal Force (Fn)</th>
-                            <th>Friction Force (Fμ)</th>
-                            <th>Force Of Gravity (Fg)</th>
-                          </tr>
-                         </thead>
-                         <tbody>
-                           <tr>
-                             <td>m * g * cos(θ)</td>
-                             <td>m * g * sin(θ)</td>
-                             <td>m * g</td>
-                           </tr>
-                        </tbody>
-                      </table>
-                </div>
-               
+                        <thead <tr>
+                            <th colspan="3">Model values</th>
+                            </tr>
+                            <tr>
 
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Box mass (m): </td>
+                                <td>10 kg</td>
+
+                            </tr>
+                            <tr>
+                                <td>gravity acceleration (g): </td>
+                                <td>9.82 ms^2</td>
+
+                            </tr>
+                            <tr>
+                                <td>Coefficient of friction (μ): </td>
+                                <td>0.42</td>
+
+                            </tr>
+                            <tr>
+                                <td>Incline angle (θ):</td>
+                                <td>x °</td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <div class="value-table">
+                    <table>
+                        <thead <tr>
+                            <th colspan="3">Vector definitions</th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Force component (F1): </td>
+                                <td>m * g * sin(θ)</td>
+
+                            </tr>
+                            <tr>
+                                <td>Normal force (Fn): </td>
+                                <td>m * g * cos(θ)</td>
+
+                            </tr>
+                            <tr>
+                                <td>Friction force (Fμ): </td>
+                                <td>Fn * μ</td>
+
+                            </tr>
+                            <tr>
+                                <td>Force of gravity (Fg): </td>
+                                <td>m * g</td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="value-table">
+                    <table>
+                        <thead <tr>
+                            <th colspan="3">Results</th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Fn:</td>
+                                <td>
+                                    <p id="fn-text"></p>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>F1: </td>
+                                <td>
+                                    <p id="f1-text"></p>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>Fμ: </td>
+                                <td>
+                                    <p id="fμ-text"></p>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>Fg: </td>
+                                <td>
+                                    <p id="fg-text">
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            
-            <div id="angle"><h3 id="angle-text">rad</h3></div>
+
+            <div id="angle">
+                <h3 id="angle-text">rad</h3>
+            </div>
             <div id="plane">
+
                 <div id="box">
-                    <div id="ff" class="vector">Fμ</div>
+                    <div id="f1" class="vector"> ◄ F1</div>
+                    <div id="ff" class="vector">Fμ ►</div>
+                    <div id="arrow-up">
+                        <i class="fa-light fa-solid fa-arrow-up"></i>
+                    </div>
                     <div id="fn" class="vector">Fn
                         <div id="mk">Fμ</div>
                     </div>
-                    <div id="fg" class="vector">Fg</div>
-                  
+                    <div id="fg" class="vector">Fg ▼</div>
+                    <div id="f2" class="vector"> ▼ F2</div>
+
                 </div>
             </div>
-         
+
         </article>
     </main>
     <script type="module" src="main.js"></script>
