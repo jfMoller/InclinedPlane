@@ -1,5 +1,5 @@
 * {
-/*   outline: solid 1px green; */
+  outline: solid 1px green;
 }
 html {
   height: 100%;
@@ -8,6 +8,7 @@ html {
 body {
   height: 100%;
   background-color: gray;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 main {
@@ -26,6 +27,27 @@ article {
   justify-content: flex-end;
   flex-direction: column;
   overflow-y: hidden;
+}
+
+#index-container {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  padding: 0;
+  width: 80%;
+  height: 80%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.value-table {
+color: white;
+padding: 1rem;
+text-align: center;
+}
+th {
+  padding: 1rem;
 }
 
 #plane {
@@ -106,15 +128,16 @@ justify-content: flex-end;
   width: 100px;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 #angle-text {
   position: relative;
   color: white;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 200;
   bottom: 10px;
+  left: 80px;
   
 }
 

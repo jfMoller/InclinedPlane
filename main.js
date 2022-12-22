@@ -60,7 +60,7 @@ function render() {
     "px";
 
   //metric displays
-angleValue.innerText = (57.296 * planeAngle).toFixed(2).toString() + "°";
+angleValue.innerText = "θ = " + (57.296 * planeAngle).toFixed(2).toString() + "°";
 
 
 
