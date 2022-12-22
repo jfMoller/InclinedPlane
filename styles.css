@@ -21,11 +21,11 @@ article {
   height: 600px;
   width: 1000px;
   background-color: black;
-  border-radius: 10px;;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   flex-direction: column;
+  overflow-y: hidden;
 }
 
 #plane {
@@ -93,6 +93,29 @@ justify-content: flex-end;
   height: 1px;
   background-color: green;
   text-align: center;
+}
+
+#angle {
+  position: relative;
+  z-index: 1;
+  right: 400px;
+  top: 50px;
+  border: black 1px solid;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+#angle-text {
+  position: relative;
+  color: white;
+  font-size: 20px;
+  font-weight: 200;
+  bottom: 10px;
+  
 }
 
 :root {

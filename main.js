@@ -1,4 +1,12 @@
-import { root, box, plane, gravityVector, oppositeCathetus, normalVector } from "./nodes.js";
+import {
+  root,
+  box,
+  plane,
+  gravityVector,
+  oppositeCathetus,
+  normalVector,
+  angleValue,
+} from "./nodes.js";
 import { handlesKeyDown, handlesKeyUp } from "./event.js";
 
 let planeHeight = 39;
@@ -23,14 +31,6 @@ let frictionNumber = 0.42; //random value, non material surface
 export let key = { up: false, down: false };
 addEventListener("keydown", handlesKeyDown);
 addEventListener("keyup", handlesKeyUp);
-
-/* box.addEventListener("click", () => {
-  box.setAttribute("class", "box-animation");
-  setTimeout(() => {
-    box.removeAttribute("class", "box-animation");
-  }, 10000);
-}); */
-
 function render() {
   planeHypotenuse = Math.sqrt(
     Math.pow(planeHeight, 2) + Math.pow(planeWidth, 2)
@@ -53,9 +53,16 @@ function render() {
   //ratios for box-triangle
   normalVector.style.height = ((planeWidth / 8) * 2).toString() + "px";
 
-  gravityVector.style.height = (190 + (planeHeight / 16) * 2).toString() + "px";
+  gravityVector.style.height = (200 + planeHeight / 16).toString() + "px";
 
-  oppositeCathetus.style.width = (planeAngle * (parseFloat(gravityVector.style.height) / 2)).toString() + "px";
+  oppositeCathetus.style.width =
+    (planeAngle * (parseFloat(gravityVector.style.height) / 2)).toString() +
+    "px";
+
+  //metric displays
+angleValue.innerText = (57.296 * planeAngle).toFixed(2).toString() + "°";
+
+
 
   maintainsGraphicalPosition();
   requestAnimationFrame(render);
@@ -98,7 +105,6 @@ export function maintainsGraphicalPosition() {
   root.style.setProperty("--animation_delay", animationDelay + "s");
 
   gravityVector.style.transform = "rotate(" + planeAngle.toString() + "rad)";
-
 }
 
 /*   console.log(window.getComputedStyle(root).getPropertyValue("--box_slide_bottom"));
