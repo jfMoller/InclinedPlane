@@ -9,7 +9,9 @@ import {
   fnValue,
   f1Value,
   fμValue,
-  fgValue
+  fgValue,
+  f1Vector,
+  frictionVector
 } from "./nodes.js";
 import { handlesKeyDown, handlesKeyUp } from "./event.js";
 
@@ -60,8 +62,21 @@ function render() {
   gravityVector.style.height = (200 + planeHeight / 16).toString() + "px";
 
   oppositeCathetus.style.width =
-    (planeAngle * (parseFloat(gravityVector.style.height) / 2)).toString() +
-    "px";
+  (f1).toFixed(2).toString() +
+  "px";
+  oppositeCathetus.style.top =
+  (normalForce * 2).toFixed(2).toString() +
+  "px";
+
+  //ratios for F1 and Fμ
+  f1Vector.style.width = (f1 * 2).toFixed(2).toString() +
+  "px";
+  frictionVector.style.width = (frictionForce * 2).toFixed(2).toString() +
+  "px";
+  gravityVector.style.height = (mg * 2).toFixed(2).toString() +
+  "px";
+  normalVector.style.height = (normalForce * 2).toFixed(2).toString() +
+  "px";
 
   //metric displays
 angleValue.innerText = "θ = " + (57.296 * planeAngle).toFixed(2).toString() + "°";

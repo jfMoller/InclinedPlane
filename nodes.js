@@ -7,6 +7,8 @@ export let plane = document.querySelector("#plane");
 export let normalVector = document.querySelector("#fn");
 export let frictionVector = document.querySelector("#ff");
 export let gravityVector = document.querySelector("#fg");
+export let f1Vector = document.querySelector("#f1");
+export let f2Vector = document.querySelector("#f2");
 
 //from the box-triangle
 export let oppositeCathetus = document.querySelector("#mk");

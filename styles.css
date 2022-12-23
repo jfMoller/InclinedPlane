@@ -70,7 +70,7 @@ tbody {
 }
 
 #box {
-  background-color: lightgreen;
+  background-color: purple;
 position: inherit;
 right: 100px;
 bottom: 80px;
@@ -86,28 +86,56 @@ bottom: 80px;
 #f1 {
   position: inherit;
   display: flex;
-  height: 1px;
+  height: 2px;
 width: 200px;
 display: flex;
 justify-content: flex-start;
   align-items: flex-end;
-  background-color: transparent;
+  background: linear-gradient(
+    to right,
+    rgb(255, 146, 50) 50%,
+    transparent 51% 100%
+  );
+}
+
+#f1 #f1-title {
+  position: relative;
+  z-index: 2;
+  left: 2px;
+  bottom: 2px;
+}
+
+#f1 i {
+  position: relative;
+  top: 6.9px;
+  color: rgb(255, 146, 50)
 }
 #ff {
   position: inherit;
   display: flex;
-  height: 1px;
+  height: 2px;
 width: 200px;
 display: flex;
 justify-content: flex-end;
-  align-items: flex-end;
-  background-color: green;
+  align-items: flex-start;
+  background: linear-gradient(
+    to left,
+    lightgreen 50%,
+    transparent 51% 100%
+  );
+}
+
+#ff i {
+  position: relative;
+  top: -7.4px;
+  color: lightgreen
 }
 
 #arrow-up {
   position: relative;
   display: flex;
-  bottom: 100px;
+  bottom: 1px;
+  left: 21px;
   color:Red;
 }
 
@@ -117,19 +145,57 @@ justify-content: flex-end;
   width: 2px;
   display: flex;
 justify-content: flex-end;
-  background-color: red;
+background: linear-gradient(
+    to bottom,
+    red 50%,
+    blue 51% 100%
+  );
+}
+
+#fn #fn-title {
+  position: relative;
+  right: 14px;
+  bottom: 7px;
+}
+#fn #f1-title {
+  position: relative;
+}
+
+#arrow-down {
+  position: relative;
+  display: flex;
+  top: -3px;
+  right: 5.9px;
+  color:blue;
 }
 
 
 #fg {
   position: inherit;
   height: 200px;
-  width: 1px;
+  width: 2px;
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  background-color: white;
+  background: linear-gradient(
+    to top,
+    white 50%,
+    transparent 51% 100%
+  );
   transform: rotate(0.25rad);
+}
+
+#fg-title {
+  position: relative;
+  right: 14px;
+}
+
+#fg i {
+  color: white;
+  position: relative;
+  display: flex;
+  bottom: -4px;
+  left: 27.5px;
 }
 
 #f2 {
@@ -145,10 +211,13 @@ justify-content: flex-start;
 
 #mk {
   position: inherit;
-  top: 200px;
   width: 300px;
-  height: 1px;
-  background-color: green;
+  height: 2px;
+  top: 100px;
+  display: flex;
+justify-content: center;
+  align-items: flex-start;
+  background-color: rgb(255, 146, 50);
   text-align: center;
 }
 
@@ -157,7 +226,6 @@ justify-content: flex-start;
   z-index: 1;
   right: 400px;
   top: 50px;
-  border: black 1px solid;
   border-radius: 50%;
   height: 100px;
   width: 100px;
@@ -171,7 +239,7 @@ justify-content: flex-start;
   color: white;
   font-size: 18px;
   font-weight: 200;
-  bottom: 10px;
+  bottom: 15px;
   left: 80px;
   
 }
