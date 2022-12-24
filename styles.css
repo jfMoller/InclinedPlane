@@ -131,7 +131,7 @@ justify-content: flex-end;
   color: lightgreen
 }
 
-#arrow-up {
+#fn i {
   position: relative;
   display: flex;
   bottom: 1px;
