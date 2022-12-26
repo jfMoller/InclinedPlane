@@ -83,6 +83,10 @@ bottom: 80px;
   justify-content: center;
 }
 
+i {
+  font-size: 13px;
+}
+
 #f1 {
   position: inherit;
   display: flex;
@@ -107,8 +111,9 @@ justify-content: flex-start;
 
 #f1 i {
   position: relative;
-  top: 6.9px;
-  color: rgb(255, 146, 50)
+  top: 5.5px;
+  right: 0.2px;
+  color: rgb(255, 146, 50);
 }
 #ff {
   position: inherit;
@@ -127,16 +132,17 @@ justify-content: flex-end;
 
 #ff i {
   position: relative;
-  top: -7.4px;
-  color: lightgreen
+  top: -5.3px;
+  left: 0.2px;
+  color: lightgreen;
 }
 
 #fn i {
   position: relative;
   display: flex;
   bottom: 1px;
-  left: 21px;
-  color:Red;
+  left: 20.5px;
+  color:red;
 }
 
 #fn {
@@ -164,8 +170,8 @@ background: linear-gradient(
 #arrow-down {
   position: relative;
   display: flex;
-  top: -3px;
-  right: 5.9px;
+  top: -4.5px;
+  right: 4.9px;
   color:blue;
 }
 
@@ -191,11 +197,11 @@ background: linear-gradient(
 }
 
 #fg i {
-  color: white;
+  color: rgb(255, 255, 255);
   position: relative;
   display: flex;
-  bottom: -4px;
-  left: 27.5px;
+  bottom: -5px;
+  left: 26px;
 }
 
 #f2 {
@@ -209,8 +215,23 @@ justify-content: flex-start;
   background-color: transparent;
 }
 
+#f2 #f2-title {
+  position: relative;
+  right: -9px;
+  bottom: -4px;
+}
+
+#f2 i {
+  position: relative;
+  display: flex;
+  bottom: -5px;
+  left: -16.5px;
+  color:blue;
+}
+
 #mk {
   position: inherit;
+  z-index: -1;
   width: 300px;
   height: 2px;
   top: 100px;

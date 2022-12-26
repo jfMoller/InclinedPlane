@@ -11,7 +11,8 @@ import {
   fμValue,
   fgValue,
   f1Vector,
-  frictionVector
+  frictionVector,
+  f2Vector
 } from "./nodes.js";
 import { handlesKeyDown, handlesKeyUp } from "./event.js";
 
@@ -76,6 +77,8 @@ function render() {
   gravityVector.style.height = (mg * 2).toFixed(2).toString() +
   "px";
   normalVector.style.height = (normalForce * 2).toFixed(2).toString() +
+  "px";
+  f2Vector.style.height = (normalForce * 2).toFixed(2).toString() +
   "px";
 
   //metric displays
