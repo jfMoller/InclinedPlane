@@ -1,5 +1,5 @@
 * {
- /*  outline: solid 1px green; */
+  /* outline: solid 1px green; */
   margin: 0;
   padding: 0;
 }
@@ -10,12 +10,14 @@ html {
 body {
   height: 100%;
   background-color: gray;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
 main {
   height: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -30,31 +32,56 @@ article {
   flex-direction: column;
   overflow-y: hidden;
 }
+section {
+  width: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(44, 44, 44);
+}
 
 #index-container {
   position: relative;
   z-index: 2;
   margin: 0;
   padding: 0;
-  width: 80%;
-  height: 80%;
+
   display: flex;
-  flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
 }
 
 .value-table {
-color: white;
-padding: 0.5rem;
+  color: white;
+  padding: 0.5rem;
+}
 
+thead {
+  background-color: rgba(119, 136, 153, 0.288);
+}
+
+tbody {
+  background-color: rgba(99, 99, 99, 0.171);
+}
+
+td {
+  padding: 5px;
 }
 
 tbody {
   text-align: left;
 }
 
+.pie-chart {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  outline: solid 1px rgba(0, 0, 0, 0.1);
+}
 
+#slide-pie-chart {
+  background-image: conic-gradient(#6bff81 0 50%, #ff6361 0 50%);
+}
 
 #plane {
   position: absolute;
@@ -71,9 +98,9 @@ tbody {
 
 #box {
   background-color: purple;
-position: inherit;
-right: 100px;
-bottom: 80px;
+  position: inherit;
+  right: 100px;
+  bottom: 80px;
   z-index: 999;
   height: 80px;
   width: 80px;
@@ -91,9 +118,9 @@ i {
   position: inherit;
   display: flex;
   height: 2px;
-width: 200px;
-display: flex;
-justify-content: flex-start;
+  width: 200px;
+  display: flex;
+  justify-content: flex-start;
   align-items: flex-end;
   background: linear-gradient(
     to right,
@@ -119,15 +146,11 @@ justify-content: flex-start;
   position: inherit;
   display: flex;
   height: 2px;
-width: 200px;
-display: flex;
-justify-content: flex-end;
+  width: 200px;
+  display: flex;
+  justify-content: flex-end;
   align-items: flex-start;
-  background: linear-gradient(
-    to left,
-    lightgreen 50%,
-    transparent 51% 100%
-  );
+  background: linear-gradient(to left, lightgreen 50%, transparent 51% 100%);
 }
 
 #ff i {
@@ -142,7 +165,7 @@ justify-content: flex-end;
   display: flex;
   bottom: 1px;
   left: 20.5px;
-  color:red;
+  color: red;
 }
 
 #fn {
@@ -150,12 +173,8 @@ justify-content: flex-end;
   height: 200px;
   width: 2px;
   display: flex;
-justify-content: flex-end;
-background: linear-gradient(
-    to bottom,
-    red 50%,
-    blue 51% 100%
-  );
+  justify-content: flex-end;
+  background: linear-gradient(to bottom, red 50%, blue 51% 100%);
 }
 
 #fn #fn-title {
@@ -172,9 +191,8 @@ background: linear-gradient(
   display: flex;
   top: -4.5px;
   right: 4.9px;
-  color:blue;
+  color: blue;
 }
-
 
 #fg {
   position: inherit;
@@ -183,11 +201,7 @@ background: linear-gradient(
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  background: linear-gradient(
-    to top,
-    white 50%,
-    transparent 51% 100%
-  );
+  background: linear-gradient(to top, white 50%, transparent 51% 100%);
   transform: rotate(0.25rad);
 }
 
@@ -208,9 +222,9 @@ background: linear-gradient(
   position: inherit;
   display: flex;
   height: 200px;
-width: 1px;
-display: flex;
-justify-content: flex-start;
+  width: 1px;
+  display: flex;
+  justify-content: flex-start;
   align-items: flex-end;
   background-color: transparent;
 }
@@ -226,7 +240,7 @@ justify-content: flex-start;
   display: flex;
   bottom: -5px;
   left: -16.5px;
-  color:blue;
+  color: blue;
 }
 
 #mk {
@@ -236,7 +250,7 @@ justify-content: flex-start;
   height: 2px;
   top: 100px;
   display: flex;
-justify-content: center;
+  justify-content: center;
   align-items: flex-start;
   background-color: rgb(255, 146, 50);
   text-align: center;
@@ -262,7 +276,6 @@ justify-content: center;
   font-weight: 200;
   bottom: 15px;
   left: 80px;
-  
 }
 
 :root {
@@ -278,14 +291,14 @@ justify-content: center;
   animation-name: box_slide;
   animation-duration: var(--box_velocity);
   animation-delay: var(--box_delay);
-  animation-fill-mode:both;
+  animation-fill-mode: both;
 }
 @keyframes box_slide {
   from {
     bottom: var(--box_bottom);
     right: var(--box_right);
   }
-  100%{
+  100% {
     bottom: var(--box_slide_bottom);
     right: var(--box_slide_right);
   }
