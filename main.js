@@ -12,7 +12,8 @@ import {
   fgValue,
   f1Vector,
   frictionVector,
-  f2Vector
+  f2Vector,
+  pieChart
 } from "./nodes.js";
 import { handlesKeyDown, handlesKeyUp } from "./event.js";
 
@@ -91,6 +92,7 @@ f1Value.innerText = f1.toFixed(2).toString() + " N";
 
 
   maintainsGraphicalPosition();
+  handlesPieChart();
   requestAnimationFrame(render);
 }
 render();
@@ -131,6 +133,32 @@ export function maintainsGraphicalPosition() {
   root.style.setProperty("--animation_delay", animationDelay + "s");
 
   gravityVector.style.transform = "rotate(" + planeAngle.toString() + "rad)";
+}
+
+function handlesPieChart () {
+  let combinedValue;
+  let f1Ratio;
+  let fμRatio;
+  let f1Color;
+  let fμColor;
+
+  combinedValue = f1 + frictionForce;
+  f1Ratio = (f1 / combinedValue) * 100;
+  fμRatio = (frictionForce / combinedValue) * 100;
+
+  console.log(combinedValue)
+
+  f1Color = "orange";
+  fμColor = "lightgreen";
+
+  pieChart.style.backgroundImage = //only winRatio is needed for the chart
+    "conic-gradient(" +
+    fμColor +
+    " 0 " +
+    fμRatio.toString() + //the % of winning
+    "%," +
+    f1Color +
+    " 0 100%)"; //the remaining % amount illustrates the % of losing
 }
 
 /*   console.log(window.getComputedStyle(root).getPropertyValue("--box_slide_bottom"));
