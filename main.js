@@ -13,9 +13,13 @@ import {
   f1Vector,
   frictionVector,
   f2Vector,
-  pieChart
+  pieChart,
+  massInputField,
+  gravityInputField,
+  frictionInputField,
+  angleInputField,
 } from "./nodes.js";
-import { handlesKeyDown, handlesKeyUp } from "./event.js";
+import { handlesKeyDown, handlesKeyUp, handlesChange } from "./event.js";
 
 let planeHeight = 39;
 let planeWidth = 800; //px
@@ -30,19 +34,49 @@ let boxVelocity = 0;
 let animationDelay = 0;
 
 let mass = 10; //kg
-let mg = 9.82 * mass;
+let g = 9.82;
+let frictionNumber = 0.42; //random value, non material surface
+
+let mg = mass * g;
 let normalForce;
 let f1;
 let frictionForce;
-let frictionNumber = 0.42; //random value, non material surface
+
+export let userInput = {
+  mass: null,
+  g: null,
+  frictionNumber: null,
+  angle: null,
+};
 
 export let key = { up: false, down: false };
 addEventListener("keydown", handlesKeyDown);
 addEventListener("keyup", handlesKeyUp);
+
+massInputField.addEventListener("change", handlesChange);
+gravityInputField.addEventListener("change", handlesChange);
+frictionInputField.addEventListener("change", handlesChange);
+angleInputField.addEventListener("change", handlesChange);
+
 function render() {
   planeHypotenuse = Math.sqrt(
     Math.pow(planeHeight, 2) + Math.pow(planeWidth, 2)
   );
+
+  if (userInput.mass !== null) {
+    mass = userInput.mass;
+  }
+  if (userInput.g !== null) {
+    g = userInput.g;
+  }
+  if (userInput.frictionNumber !== null) {
+    frictionNumber = userInput.frictionNumber;
+  }
+  if (userInput.angle !== null) {
+    planeAngle = userInput.angle / 57.296;
+  }
+  mg = mass * g;
+
   planeAngle = Math.asin(planeHeight / planeHypotenuse);
 
   //when non-moving
@@ -63,33 +97,29 @@ function render() {
 
   gravityVector.style.height = (200 + planeHeight / 16).toString() + "px";
 
-  oppositeCathetus.style.width =
-  (f1).toFixed(2).toString() +
-  "px";
-  oppositeCathetus.style.top =
-  (normalForce * 2).toFixed(2).toString() +
-  "px";
+  oppositeCathetus.style.width = f1.toFixed(2).toString() + "px";
+  oppositeCathetus.style.top = (normalForce * 2).toFixed(2).toString() + "px";
 
   //ratios for F1 and Fμ
-  f1Vector.style.width = (f1 * 2).toFixed(2).toString() +
-  "px";
-  frictionVector.style.width = (frictionForce * 2).toFixed(2).toString() +
-  "px";
-  gravityVector.style.height = (mg * 2).toFixed(2).toString() +
-  "px";
-  normalVector.style.height = (normalForce * 2).toFixed(2).toString() +
-  "px";
-  f2Vector.style.height = (normalForce * 2).toFixed(2).toString() +
-  "px";
+  f1Vector.style.width = (f1 * 2).toFixed(2).toString() + "px";
+  frictionVector.style.width = (frictionForce * 2).toFixed(2).toString() + "px";
+  gravityVector.style.height = (mg * 2).toFixed(2).toString() + "px";
+  normalVector.style.height = (normalForce * 2).toFixed(2).toString() + "px";
+  f2Vector.style.height = (normalForce * 2).toFixed(2).toString() + "px";
 
   //metric displays
-angleValue.innerText = "θ = " + (57.296 * planeAngle).toFixed(2).toString() + "°";
-fnValue.innerText = normalForce.toFixed(2).toString() + " N";
-fμValue.innerText = frictionForce.toFixed(2).toString() + " N";
-fgValue.innerText = mg.toFixed(2).toString() + " N";
-f1Value.innerText = f1.toFixed(2).toString() + " N";
+  angleValue.innerText =
+    "θ = " + (57.296 * planeAngle).toFixed(2).toString() + "°";
+  fnValue.innerText = normalForce.toFixed(2).toString() + " N";
+  fμValue.innerText = frictionForce.toFixed(2).toString() + " N";
+  fgValue.innerText = mg.toFixed(2).toString() + " N";
+  f1Value.innerText = f1.toFixed(2).toString() + " N";
 
-
+  //model values
+  massInputField.setAttribute("placeholder", mass);
+  gravityInputField.setAttribute("placeholder", g);
+  frictionInputField.setAttribute("placeholder", frictionNumber);
+  angleInputField.setAttribute("placeholder", (57.296 * planeAngle).toFixed(2));
 
   maintainsGraphicalPosition();
   handlesPieChart();
@@ -135,7 +165,7 @@ export function maintainsGraphicalPosition() {
   gravityVector.style.transform = "rotate(" + planeAngle.toString() + "rad)";
 }
 
-function handlesPieChart () {
+function handlesPieChart() {
   let combinedValue;
   let f1Ratio;
   let fμRatio;
@@ -145,8 +175,6 @@ function handlesPieChart () {
   combinedValue = f1 + frictionForce;
   f1Ratio = (f1 / combinedValue) * 100;
   fμRatio = (frictionForce / combinedValue) * 100;
-
-  console.log(combinedValue)
 
   f1Color = "orange";
   fμColor = "lightgreen";
