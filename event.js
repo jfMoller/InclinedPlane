@@ -18,17 +18,14 @@ export function handlesKeyUp(event) {
 }
 
 export function handlesChange(event) {
+  console.log(event.target.id);
   if (event.target.id === "box-mass-input") {
     userInput.mass = parseFloat(event.target.value);
-
+  }
   if (event.target.id === "gravity-acceleration-input") {
     userInput.g = parseFloat(event.target.value);
   }
   if (event.target.id === "friction-number-input") {
     userInput.frictionNumber = parseFloat(event.target.value);
   }
-  if (event.target.id === "incline-angle-input") {
-    userInput.angle = parseFloat(event.target.value);
-  }
-}
 }

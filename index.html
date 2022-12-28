@@ -13,15 +13,17 @@
 <body>
 
     <main>
+        <div id="model">
+        <div id="model-scale">
         <article>
             <div id="angle">
-                <h3 id="angle-text">rad</h3>
+                <p id="angle-text">rad</p>
             </div>
             <div id="plane">
 
                 <div id="box">
 
-                    <div id="f1" class="vector"><i class="fa-light fa-solid fa-arrow-left"></i>
+                    <div id="f1" class="vector-x-axis"><i class="fa-light fa-solid fa-arrow-left"></i>
 
 
                         <p id="f1-title">F1</p>
@@ -41,7 +43,7 @@
                                 <i class="fa-light fa-solid fa-arrow-down"></i>
                             </div>
                         </div>
-                        <div id="mk">
+                        <div id="mk" class="vector">
                             <p>F1</p>
                         </div>
 
@@ -60,6 +62,8 @@
             </div>
 
         </article>
+    </div>
+    </div>
         <div id="separator">
             <div id="plane-base"></div>
         </div>
@@ -92,7 +96,7 @@
                             </tr>
                             <tr>
                                 <td>Incline angle (θ):</td>
-                                <td><input type="text" id="incline-angle-input" placeholder="x"> °</td>
+                                <td><input type="text" id="incline-angle-input" placeholder="x" disabled> °</td>
 
                             </tr>
                         </tbody>

@@ -21,6 +21,15 @@ main {
   justify-content: center;
   align-items: center;
 }
+#model{
+  height: 600px;
+  width: 1000px;
+  background-color: black;
+}
+#model-scale {
+  scale: 1;
+
+}
 
 article {
   height: 600px;
@@ -32,6 +41,7 @@ article {
   flex-direction: column;
   overflow-y: hidden;
 }
+
 section {
   width: 1000px;
   display: flex;
@@ -86,6 +96,10 @@ tbody {
   text-align: left;
 }
 
+article p {
+  color: white;
+}
+
 .pie-chart {
   width: 120px;
   height: 120px;
@@ -107,8 +121,10 @@ tbody {
 }
 
 .vector {
-  color: white;
+
+
 }
+
 
 #separator {
   width: 1000px;

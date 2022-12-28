@@ -18,6 +18,7 @@ import {
   gravityInputField,
   frictionInputField,
   angleInputField,
+  modelScale,
 } from "./nodes.js";
 import { handlesKeyDown, handlesKeyUp, handlesChange } from "./event.js";
 
@@ -59,24 +60,23 @@ frictionInputField.addEventListener("change", handlesChange);
 angleInputField.addEventListener("change", handlesChange);
 
 function render() {
-  planeHypotenuse = Math.sqrt(
-    Math.pow(planeHeight, 2) + Math.pow(planeWidth, 2)
-  );
-
+  //handles user change to mass, g and friction number
   if (userInput.mass !== null) {
     mass = userInput.mass;
+    mg = mass * g;
   }
   if (userInput.g !== null) {
     g = userInput.g;
+    mg = mass * g;
   }
   if (userInput.frictionNumber !== null) {
     frictionNumber = userInput.frictionNumber;
   }
-  if (userInput.angle !== null) {
-    planeAngle = userInput.angle / 57.296;
-  }
-  mg = mass * g;
 
+  //establishes ratios
+  planeHypotenuse = Math.sqrt(
+    Math.pow(planeHeight, 2) + Math.pow(planeWidth, 2)
+  );
   planeAngle = Math.asin(planeHeight / planeHypotenuse);
 
   //when non-moving
@@ -84,6 +84,7 @@ function render() {
   normalForce = mg * Math.cos(planeAngle);
   frictionForce = frictionNumber * normalForce;
 
+  //handles animation start
   if (f1 > frictionForce) {
     box.setAttribute("class", "box-animation");
     boxVelocity -= planeAngle * 0.5;
@@ -92,7 +93,20 @@ function render() {
     boxVelocity = 100;
   }
 
-  //ratios for box-triangle
+  //visual model scale in relation to vectors
+  
+/*   if (((1 - (mg * 0.001)).toString() > 1) ||
+  ((1 - (mg * 0.001)).toString() < 0)) {
+    modelScale.style.scale = 1;
+  } */
+ 
+    modelScale.style.scale = (1 - (mg * 0.001)).toString();
+   if (((1 - (mg * 0.001))) > 1) {
+    modelScale.style.scale = 0.5;
+   }
+
+
+  //visual ratios for box-triangle
   normalVector.style.height = ((planeWidth / 8) * 2).toString() + "px";
 
   gravityVector.style.height = (200 + planeHeight / 16).toString() + "px";
@@ -107,7 +121,7 @@ function render() {
   normalVector.style.height = (normalForce * 2).toFixed(2).toString() + "px";
   f2Vector.style.height = (normalForce * 2).toFixed(2).toString() + "px";
 
-  //metric displays
+  //visual metric displays
   angleValue.innerText =
     "θ = " + (57.296 * planeAngle).toFixed(2).toString() + "°";
   fnValue.innerText = normalForce.toFixed(2).toString() + " N";
@@ -119,7 +133,10 @@ function render() {
   massInputField.setAttribute("placeholder", mass);
   gravityInputField.setAttribute("placeholder", g);
   frictionInputField.setAttribute("placeholder", frictionNumber);
-  angleInputField.setAttribute("placeholder", (57.296 * planeAngle).toFixed(2));
+  angleInputField.setAttribute(
+    "placeholder",
+    ((180 / Math.PI) * planeAngle).toFixed(2)
+  );
 
   maintainsGraphicalPosition();
   handlesPieChart();
@@ -131,6 +148,7 @@ export function maintainsGraphicalPosition() {
   if (key.up) {
     if (planeHeight <= 500) {
       planeHeight += 5;
+      planeAngle = Math.asin(planeHeight / planeHypotenuse);
       boxBottom -= 0.3;
       boxRight += 0.16;
       boxSlideBottom += -Math.exp(2.776);
