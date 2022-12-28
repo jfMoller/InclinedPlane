@@ -25,10 +25,10 @@ main {
   height: 600px;
   width: 1000px;
   background-color: black;
+  overflow: hidden;
 }
 #model-scale {
   scale: 1;
-
 }
 
 article {
@@ -74,6 +74,9 @@ input::placeholder {
   color: white;
  
 }
+
+
+
 
 .value-table {
   color: white;
@@ -121,7 +124,6 @@ article p {
 }
 
 .vector {
-
 
 }
 

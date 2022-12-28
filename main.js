@@ -43,14 +43,16 @@ let normalForce;
 let f1;
 let frictionForce;
 
+//model scale
+let scale = 1;
+
 export let userInput = {
   mass: null,
   g: null,
   frictionNumber: null,
-  angle: null,
 };
 
-export let key = { up: false, down: false };
+export let key = { up: false, down: false, shift: false };
 addEventListener("keydown", handlesKeyDown);
 addEventListener("keyup", handlesKeyUp);
 
@@ -93,23 +95,57 @@ function render() {
     boxVelocity = 100;
   }
 
-  //visual model scale in relation to vectors
-  
-/*   if (((1 - (mg * 0.001)).toString() > 1) ||
-  ((1 - (mg * 0.001)).toString() < 0)) {
-    modelScale.style.scale = 1;
-  } */
- 
-    modelScale.style.scale = (1 - (mg * 0.001)).toString();
-   if (((1 - (mg * 0.001))) > 1) {
-    modelScale.style.scale = 0.5;
-   }
+  //prototype visual model scale in relation to vectors
 
+  if (mass >= 0 && mass < 10) {
+    scale = 0.9;
+    modelScale.style.scale = scale.toString();
+  }
+  if (mass >= 10 && mass < 14) {
+    scale = 0.8;
+    modelScale.style.scale = scale;
+  }
+  if (mass >= 14 && mass < 20) {
+    scale = 0.65;
+    modelScale.style.scale = scale.toString();
+  }
+  if (mass >= 20 && mass < 30) {
+    scale = 0.55;
+    modelScale.style.scale = scale.toString();
+  }
+  if (mass >= 30 && mass < 40) {
+    scale = 0.45;
+    modelScale.style.scale = scale.toString();
+  }
+  if (mass >= 40 && mass < 50) {
+    scale = 0.4;
+    modelScale.style.scale = scale.toString();
+  }
+  if (mass >= 50 && mass < 60) {
+    scale = 0.35;
+    modelScale.style.scale = scale.toString();
+  }
+  if (mass >= 60 && mass < 70) {
+    scale = 0.3;
+    modelScale.style.scale = scale.toString();
+  }
+  if (mass >= 70 && mass < 80) {
+    scale = 0.25;
+    modelScale.style.scale = scale.toString();
+  }
+  if (mass >= 80 && mass < 100) {
+    scale = 0.22;
+    modelScale.style.scale = scale.toString();
+  }
+  if (mass >= 100) {
+    scale = 0.22;
+    modelScale.style.scale = scale.toString();
+  }
 
   //visual ratios for box-triangle
   normalVector.style.height = ((planeWidth / 8) * 2).toString() + "px";
 
-  gravityVector.style.height = (200 + planeHeight / 16).toString() + "px";
+  gravityVector.style.height = (planeHeight / 16).toString() + "px";
 
   oppositeCathetus.style.width = f1.toFixed(2).toString() + "px";
   oppositeCathetus.style.top = (normalForce * 2).toFixed(2).toString() + "px";
@@ -145,10 +181,9 @@ function render() {
 render();
 
 export function maintainsGraphicalPosition() {
-  if (key.up) {
+  if (key.up && !key.shift) {
     if (planeHeight <= 500) {
       planeHeight += 5;
-      planeAngle = Math.asin(planeHeight / planeHypotenuse);
       boxBottom -= 0.3;
       boxRight += 0.16;
       boxSlideBottom += -Math.exp(2.776);
@@ -156,7 +191,16 @@ export function maintainsGraphicalPosition() {
     } else {
       return;
     }
-  } else if (key.down) {
+  } else if (key.up && key.shift) {
+    if (planeHeight <= 500) {
+      planeHeight += 1;
+      planeAngle = Math.asin(planeHeight / planeHypotenuse);
+      boxBottom -= 0.3 / 5;
+      boxRight += 0.16 / 5;
+      boxSlideBottom += -Math.exp(2.776) / 5;
+      boxSlideRight += Math.exp(0.77) / 5;
+    }
+  } else if (key.down && !key.shift) {
     if (planeHeight >= 40) {
       planeHeight -= 5;
       boxBottom -= -0.3;
@@ -166,7 +210,17 @@ export function maintainsGraphicalPosition() {
     } else {
       return;
     }
+  } else if (key.down && key.shift) {
+    if (planeHeight <= 500) {
+      planeHeight -= 1;
+      planeAngle = Math.asin(planeHeight / planeHypotenuse);
+      boxBottom -= -0.3 / 5;
+      boxRight += -0.16 / 5;
+      boxSlideBottom += Math.exp(2.776) / 5;
+      boxSlideRight += -Math.exp(0.77) / 5;
+    }
   }
+
   plane.style.borderBottomWidth = planeHeight.toString() + "px";
   box.style.transform = "rotate(" + -planeAngle.toString() + "rad)";
   box.style.bottom = boxBottom.toString() + "px";

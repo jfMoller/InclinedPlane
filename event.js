@@ -1,12 +1,17 @@
 import { key, userInput } from "./main.js";
 
 export function handlesKeyDown(event) {
+ 
   if (event.key === "w" || event.key === "W") {
     key.up = true;
   }
   if (event.key === "s" || event.key === "S") {
     key.down = true;
   }
+  if (event.key === "Shift") {
+    key.shift = true;
+  }
+  
 }
 export function handlesKeyUp(event) {
   if (event.key === "w" || event.key === "W") {
@@ -14,6 +19,9 @@ export function handlesKeyUp(event) {
   }
   if (event.key === "s" || event.key === "S") {
     key.down = false;
+  }
+  if (event.key === "Shift") {
+    key.shift = false;
   }
 }
 
