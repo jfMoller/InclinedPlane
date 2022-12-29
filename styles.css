@@ -1,5 +1,5 @@
 * {
-/*   outline: solid 1px green; */
+  /*   outline: solid 1px green; */
   margin: 0;
   padding: 0;
 }
@@ -21,10 +21,12 @@ main {
   justify-content: center;
   align-items: center;
 }
-#model{
+#model {
   height: 600px;
   width: 1000px;
   background-color: black;
+  color: white;
+  font-size: 20px;
   overflow: hidden;
 }
 #model-scale {
@@ -72,11 +74,7 @@ section {
 
 input::placeholder {
   color: white;
- 
 }
-
-
-
 
 .value-table {
   color: white;
@@ -99,10 +97,6 @@ tbody {
   text-align: left;
 }
 
-article p {
-  color: white;
-}
-
 .pie-chart {
   width: 120px;
   height: 120px;
@@ -111,7 +105,7 @@ article p {
 }
 
 #slide-pie-chart {
-  background-image: conic-gradient(#6bff81 0 50%, #ff6361 0 50%);
+  background-image: conic-gradient(#06D6A0 0 50%, #F39237 0 50%);
 }
 
 #plane {
@@ -120,13 +114,28 @@ article p {
   width: 0;
   height: 0;
   border-left: 800px solid transparent;
-  border-bottom: 300px solid lightslategray;
+  border-bottom: 300px solid #660000;
+}
+
+#angle {
+  position: relative;
+  z-index: 1;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+#angle-text {
+  position: relative;
+  right: 350px;
+
 }
 
 .vector {
-
 }
-
 
 #separator {
   width: 1000px;
@@ -138,7 +147,7 @@ article p {
 }
 
 #box {
-  background-color: purple;
+  background-color: #392759;
   position: inherit;
   right: 100px;
   bottom: 80px;
@@ -165,7 +174,7 @@ i {
   align-items: flex-end;
   background: linear-gradient(
     to right,
-    rgb(255, 146, 50) 50%,
+    #ff5a5f 50%,
     transparent 51% 100%
   );
 }
@@ -181,7 +190,7 @@ i {
   position: relative;
   top: 5.5px;
   right: 0.2px;
-  color: rgb(255, 146, 50);
+  color: #ff5a5f;
 }
 #ff {
   position: inherit;
@@ -191,22 +200,22 @@ i {
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
-  background: linear-gradient(to left, lightgreen 50%, transparent 51% 100%);
+  background: linear-gradient(to left, #087e8b 50%, transparent 51% 100%);
 }
 
 #ff i {
   position: relative;
   top: -5.3px;
   left: 0.2px;
-  color: lightgreen;
+  color: #087e8b;
 }
 
 #fn i {
   position: relative;
   display: flex;
   bottom: 1px;
-  left: 20.5px;
-  color: red;
+  left: 3.5px;
+  color: #D63230;
 }
 
 #fn {
@@ -215,24 +224,15 @@ i {
   width: 2px;
   display: flex;
   justify-content: flex-end;
-  background: linear-gradient(to bottom, red 50%, blue 51% 100%);
+  background: linear-gradient(to bottom, #D63230 50%, #F038FF 51% 100%);
 }
 
 #fn #fn-title {
   position: relative;
-  right: 14px;
-  bottom: 7px;
+
 }
 #fn #f1-title {
   position: relative;
-}
-
-#arrow-down {
-  position: relative;
-  display: flex;
-  top: -4.5px;
-  right: 4.9px;
-  color: blue;
 }
 
 #fg {
@@ -246,17 +246,18 @@ i {
   transform: rotate(0.25rad);
 }
 
+
+
 #fg-title {
   position: relative;
-  right: 14px;
 }
 
 #fg i {
   color: rgb(255, 255, 255);
   position: relative;
   display: flex;
-  bottom: -5px;
-  left: 26px;
+  bottom: -1px;
+  left: 4px;
 }
 
 #f2 {
@@ -272,16 +273,17 @@ i {
 
 #f2 #f2-title {
   position: relative;
-  right: -9px;
-  bottom: -4px;
+  
 }
+
+
 
 #f2 i {
   position: relative;
   display: flex;
-  bottom: -5px;
-  left: -16.5px;
-  color: blue;
+  bottom: -1px;
+  left: -4.5px;
+  color: #F038FF;
 }
 
 #mk {
@@ -293,31 +295,10 @@ i {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  background-color: rgb(255, 146, 50);
+  background-color: #ff5a5f;
   text-align: center;
 }
 
-#angle {
-  position: relative;
-  z-index: 1;
-  right: 400px;
-  top: 50px;
-  border-radius: 50%;
-  height: 100px;
-  width: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-#angle-text {
-  position: relative;
-  color: white;
-  font-size: 18px;
-  font-weight: 200;
-  bottom: 15px;
-  left: 80px;
-}
 
 :root {
   --box_bottom: -3px;

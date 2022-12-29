@@ -1,5 +1,6 @@
 //model
 export let modelScale = document.querySelector("#model-scale");
+export let model = document.querySelector("#model");
 
 //shapes
 export const root = document.documentElement;

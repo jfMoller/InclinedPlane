@@ -45,6 +45,7 @@ let frictionForce;
 
 //model scale
 let scale = 1;
+let modelFontSize = 20;
 
 export let userInput = {
   mass: null,
@@ -99,47 +100,69 @@ function render() {
 
   if (mass >= 0 && mass < 10) {
     scale = 0.9;
+    modelFontSize = 15;
     modelScale.style.scale = scale.toString();
+    model.style.fontSize = modelFontSize.toString() + "px";
   }
-  if (mass >= 10 && mass < 14) {
+  if (mass >= 10 && mass < 12) {
     scale = 0.8;
+    modelFontSize = 20;
     modelScale.style.scale = scale;
+    model.style.fontSize = modelFontSize.toString() + "px";
   }
-  if (mass >= 14 && mass < 20) {
+  if (mass >= 12 && mass < 19) {
     scale = 0.65;
+    modelFontSize = 25;
     modelScale.style.scale = scale.toString();
+    model.style.fontSize = modelFontSize.toString() + "px";
   }
-  if (mass >= 20 && mass < 30) {
+  if (mass >= 19 && mass < 29) {
     scale = 0.55;
+    modelFontSize = 30;
     modelScale.style.scale = scale.toString();
+    model.style.fontSize = modelFontSize.toString() + "px";
   }
-  if (mass >= 30 && mass < 40) {
+  if (mass >= 29 && mass < 39) {
     scale = 0.45;
+    modelFontSize = 35;
     modelScale.style.scale = scale.toString();
+    model.style.fontSize = modelFontSize.toString() + "px";
   }
-  if (mass >= 40 && mass < 50) {
+  if (mass >= 39 && mass < 49) {
     scale = 0.4;
+    modelFontSize = 40;
     modelScale.style.scale = scale.toString();
+    model.style.fontSize = modelFontSize.toString() + "px";
   }
-  if (mass >= 50 && mass < 60) {
+  if (mass >= 49 && mass < 59) {
     scale = 0.35;
+    modelFontSize = 45;
     modelScale.style.scale = scale.toString();
+    model.style.fontSize = modelFontSize.toString() + "px";
   }
-  if (mass >= 60 && mass < 70) {
+  if (mass >= 59 && mass < 69) {
     scale = 0.3;
+    modelFontSize = 50;
     modelScale.style.scale = scale.toString();
+    model.style.fontSize = modelFontSize.toString() + "px";
   }
-  if (mass >= 70 && mass < 80) {
+  if (mass >= 69 && mass < 79) {
     scale = 0.25;
+    modelFontSize = 70;
     modelScale.style.scale = scale.toString();
+    model.style.fontSize = modelFontSize.toString() + "px";
   }
-  if (mass >= 80 && mass < 100) {
+  if (mass >= 79 && mass < 100) {
     scale = 0.22;
+    modelFontSize = 80;
     modelScale.style.scale = scale.toString();
+    model.style.fontSize = modelFontSize.toString() + "px";
   }
   if (mass >= 100) {
     scale = 0.22;
+    modelFontSize = 90;
     modelScale.style.scale = scale.toString();
+    model.style.fontSize = modelFontSize.toString() + "px";
   }
 
   //visual ratios for box-triangle
@@ -159,7 +182,7 @@ function render() {
 
   //visual metric displays
   angleValue.innerText =
-    "θ = " + (57.296 * planeAngle).toFixed(2).toString() + "°";
+    (57.296 * planeAngle).toFixed(2).toString() + "°";
   fnValue.innerText = normalForce.toFixed(2).toString() + " N";
   fμValue.innerText = frictionForce.toFixed(2).toString() + " N";
   fgValue.innerText = mg.toFixed(2).toString() + " N";
@@ -248,8 +271,8 @@ function handlesPieChart() {
   f1Ratio = (f1 / combinedValue) * 100;
   fμRatio = (frictionForce / combinedValue) * 100;
 
-  f1Color = "orange";
-  fμColor = "lightgreen";
+  f1Color = "#ff5a5f";
+  fμColor = "#087e8b";
 
   pieChart.style.backgroundImage = //only winRatio is needed for the chart
     "conic-gradient(" +
