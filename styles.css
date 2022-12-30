@@ -1,3 +1,16 @@
+:root {
+  --plane_height: 39px;
+  --plane_width: 800px;
+  --box_bottom: -3px;
+  --box_right: 3px;
+  --box_slide_bottom: -120px;
+  --box_slide_right: 2350px;
+  --box_velocity: s;
+  --animation_delay: 0s;
+  --model_scale: 1;
+  --model_font_size: 20;
+}
+
 * {
   /*   outline: solid 1px green; */
   margin: 0;
@@ -26,11 +39,11 @@ main {
   width: 1000px;
   background-color: black;
   color: white;
-  font-size: 20px;
+  font-size: var(--model_font_size);
   overflow: hidden;
 }
 #model-scale {
-  scale: 1;
+  scale: var(--model_scale);
 }
 
 article {
@@ -46,6 +59,7 @@ article {
 
 section {
   width: 1000px;
+  position: static;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -105,16 +119,15 @@ tbody {
 }
 
 #slide-pie-chart {
-  background-image: conic-gradient(#06D6A0 0 50%, #F39237 0 50%);
+  background-image: conic-gradient(#3fa7d6 0 50%, #59cd90 0 50%);
 }
 
 #plane {
   position: absolute;
   z-index: 0;
-  width: 0;
-  height: 0;
-  border-left: 800px solid transparent;
-  border-bottom: 300px solid #660000;
+  height: var(--plane_height);
+  border-left: var(--plane_width) solid transparent;
+  border-bottom: 300px solid #2f2f2f;
 }
 
 #angle {
@@ -137,20 +150,9 @@ tbody {
 .vector {
 }
 
-#separator {
-  width: 1000px;
-  height: 60px;
-  background-color: black;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
-
 #box {
-  background-color: #392759;
+  background-color: #610345;
   position: inherit;
-  right: 100px;
-  bottom: 80px;
   z-index: 999;
   height: 80px;
   width: 80px;
@@ -174,7 +176,7 @@ i {
   align-items: flex-end;
   background: linear-gradient(
     to right,
-    #ff5a5f 50%,
+    #59cd90 50%,
     transparent 51% 100%
   );
 }
@@ -190,7 +192,7 @@ i {
   position: relative;
   top: 5.5px;
   right: 0.2px;
-  color: #ff5a5f;
+  color: #59cd90;
 }
 #ff {
   position: inherit;
@@ -200,14 +202,15 @@ i {
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
-  background: linear-gradient(to left, #087e8b 50%, transparent 51% 100%);
+  background: linear-gradient(to left, #ee6352 50%, transparent 51% 100%);
 }
 
 #ff i {
   position: relative;
+  z-index: 2;
   top: -5.3px;
   left: 0.2px;
-  color: #087e8b;
+  color: #ee6352;
 }
 
 #fn i {
@@ -215,16 +218,17 @@ i {
   display: flex;
   bottom: 1px;
   left: 3.5px;
-  color: #D63230;
+  color: #fac05e;
 }
 
 #fn {
   position: inherit;
   height: 200px;
+  min-height: 50px;
   width: 2px;
   display: flex;
   justify-content: flex-end;
-  background: linear-gradient(to bottom, #D63230 50%, #F038FF 51% 100%);
+  background: linear-gradient(to bottom, #fac05e 50%, #7f7eff 51% 100%);
 }
 
 #fn #fn-title {
@@ -238,6 +242,7 @@ i {
 #fg {
   position: inherit;
   height: 200px;
+  min-height: 50px;
   width: 2px;
   display: flex;
   justify-content: flex-end;
@@ -264,6 +269,7 @@ i {
   position: inherit;
   display: flex;
   height: 200px;
+  min-height: 50px;
   width: 1px;
   display: flex;
   justify-content: flex-start;
@@ -283,7 +289,7 @@ i {
   display: flex;
   bottom: -1px;
   left: -4.5px;
-  color: #F038FF;
+  color: #7f7eff;
 }
 
 #mk {
@@ -295,19 +301,12 @@ i {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  background-color: #ff5a5f;
+  background-color: #59cd90;
   text-align: center;
 }
 
 
-:root {
-  --box_bottom: -3px;
-  --box_right: 3px;
-  --box_slide_bottom: -120px;
-  --box_slide_right: 2350px;
-  --box_velocity: 10s;
-  --animation_delay: 0s;
-}
+
 
 .box-animation {
   animation-name: box_slide;

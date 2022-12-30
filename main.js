@@ -21,60 +21,59 @@ import {
   modelScale,
 } from "./nodes.js";
 import { handlesKeyDown, handlesKeyUp, handlesChange } from "./event.js";
+import { getCSSPropertyValue } from "./utility.js";
 
-let planeHeight = 39;
-let planeWidth = 800; //px
-let planeHypotenuse;
-let planeAngle;
-let boxBottom = -2;
-let boxRight = 2;
-let boxSlideBottom = -120;
-let boxSlideRight = 2350;
-let boxVelocity = 0;
+//plane geometry
+let planeHeight = getCSSPropertyValue("--plane_height");
+let planeWidth = getCSSPropertyValue("--plane_width");
+let planeHypotenuse; //calculated dynamically
+let planeAngle; //caclculated dynamically
 
-let animationDelay = 0;
+//box animation properties
+let boxBottom = getCSSPropertyValue("--box_bottom");
+let boxRight = getCSSPropertyValue("--box_right");
+let boxSlideBottom = getCSSPropertyValue("--box_slide_bottom");
+let boxSlideRight = getCSSPropertyValue("--box_slide_right");
+let boxVelocity = getCSSPropertyValue("--box_velocity");
+let animationDelay = getCSSPropertyValue("--animation_delay");
 
+//values for starting model
 let mass = 10; //kg
-let g = 9.82;
-let frictionNumber = 0.42; //random value, non material surface
+let g = 9.82; //ms^2
+let frictionNumber = 0.42; //dimensionless (does not have a unit)
 
+//vector equations for when box is unmoving
 let mg = mass * g;
-let normalForce;
-let f1;
-let frictionForce;
+let f1 = mg * Math.sin(planeAngle);
+let normalForce = mg * Math.cos(planeAngle);
+let frictionForce = frictionNumber * normalForce;
 
-//model scale
-let scale = 1;
-let modelFontSize = 20;
+//properties for model scale
+let scale = getCSSPropertyValue("--model_scale");
+let modelFontSize = getCSSPropertyValue("--model_font_size");
 
+//for handling user controls of model angle
+export let key = {
+  up: false,
+  down: false,
+  shift: false,
+};
+addEventListener("keydown", handlesKeyDown);
+addEventListener("keyup", handlesKeyUp);
+
+//for handling user change of model properties
 export let userInput = {
   mass: null,
   g: null,
   frictionNumber: null,
 };
-
-export let key = { up: false, down: false, shift: false };
-addEventListener("keydown", handlesKeyDown);
-addEventListener("keyup", handlesKeyUp);
-
 massInputField.addEventListener("change", handlesChange);
 gravityInputField.addEventListener("change", handlesChange);
 frictionInputField.addEventListener("change", handlesChange);
 angleInputField.addEventListener("change", handlesChange);
 
 function render() {
-  //handles user change to mass, g and friction number
-  if (userInput.mass !== null) {
-    mass = userInput.mass;
-    mg = mass * g;
-  }
-  if (userInput.g !== null) {
-    g = userInput.g;
-    mg = mass * g;
-  }
-  if (userInput.frictionNumber !== null) {
-    frictionNumber = userInput.frictionNumber;
-  }
+  handlesUserChangesToModelValues();
 
   //establishes ratios
   planeHypotenuse = Math.sqrt(
@@ -181,8 +180,7 @@ function render() {
   f2Vector.style.height = (normalForce * 2).toFixed(2).toString() + "px";
 
   //visual metric displays
-  angleValue.innerText =
-    (57.296 * planeAngle).toFixed(2).toString() + "°";
+  angleValue.innerText = (57.296 * planeAngle).toFixed(2).toString() + "°";
   fnValue.innerText = normalForce.toFixed(2).toString() + " N";
   fμValue.innerText = frictionForce.toFixed(2).toString() + " N";
   fgValue.innerText = mg.toFixed(2).toString() + " N";
@@ -260,6 +258,20 @@ export function maintainsGraphicalPosition() {
   gravityVector.style.transform = "rotate(" + planeAngle.toString() + "rad)";
 }
 
+function handlesUserChangesToModelValues() {
+  if (userInput.mass !== null) {
+    mass = userInput.mass;
+    mg = mass * g;
+  }
+  if (userInput.g !== null) {
+    g = userInput.g;
+    mg = mass * g;
+  }
+  if (userInput.frictionNumber !== null) {
+    frictionNumber = userInput.frictionNumber;
+  }
+}
+
 function handlesPieChart() {
   let combinedValue;
   let f1Ratio;
@@ -271,8 +283,8 @@ function handlesPieChart() {
   f1Ratio = (f1 / combinedValue) * 100;
   fμRatio = (frictionForce / combinedValue) * 100;
 
-  f1Color = "#ff5a5f";
-  fμColor = "#087e8b";
+  f1Color = "#59cd90";
+  fμColor = "#ee6352";
 
   pieChart.style.backgroundImage = //only winRatio is needed for the chart
     "conic-gradient(" +
