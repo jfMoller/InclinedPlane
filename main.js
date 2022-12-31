@@ -75,28 +75,98 @@ angleInputField.addEventListener("change", handlesChange);
 function render() {
   handlesUserChangesToModelValues();
 
-  //establishes ratios
+  handlesModelScaleBasedOnModelValues();
+
+  calculatesPlaneGeometryAndTrigenometry();
+
+  displaysAngleValue();
+
+  calculatesVectorRatios();
+
+  displayVectorValues();
+
+  handlesVectorPieChart();
+
+  if (f1 > frictionForce) {
+    animatesBoxToStartSliding();
+  } else {
+    stopsAnimationAndResetsBoxPosition();
+  }
+  maintainsGraphicalPosition();
+  requestAnimationFrame(render);
+}
+render();
+
+function handlesUserChangesToModelValues() {
+  if (userInput.mass !== null) {
+    mass = userInput.mass;
+    mg = mass * g;
+  }
+  if (userInput.g !== null) {
+    g = userInput.g;
+    mg = mass * g;
+  }
+  if (userInput.frictionNumber !== null) {
+    frictionNumber = userInput.frictionNumber;
+  }
+
+  massInputField.setAttribute("placeholder", mass);
+  gravityInputField.setAttribute("placeholder", g);
+  frictionInputField.setAttribute("placeholder", frictionNumber);
+  angleInputField.setAttribute(
+    "placeholder",
+    ((180 / Math.PI) * planeAngle).toFixed(2)
+  );
+}
+
+function calculatesPlaneGeometryAndTrigenometry() {
   planeHypotenuse = Math.sqrt(
     Math.pow(planeHeight, 2) + Math.pow(planeWidth, 2)
   );
   planeAngle = Math.asin(planeHeight / planeHypotenuse);
+}
 
-  //when non-moving
+function displaysAngleValue() {
+  angleValue.innerText = (57.296 * planeAngle).toFixed(2).toString() + "°";
+}
+
+function calculatesVectorRatios() {
   f1 = mg * Math.sin(planeAngle);
   normalForce = mg * Math.cos(planeAngle);
   frictionForce = frictionNumber * normalForce;
 
-  //handles animation start
-  if (f1 > frictionForce) {
-    box.setAttribute("class", "box-animation");
-    boxVelocity -= planeAngle * 0.5;
-  } else {
-    box.removeAttribute("class", "box-animation");
-    boxVelocity = 100;
-  }
+  normalVector.style.height = ((planeWidth / 8) * 2).toString() + "px";
 
-  //prototype visual model scale in relation to vectors
+  gravityVector.style.height = (planeHeight / 16).toString() + "px";
 
+  oppositeCathetus.style.width = f1.toFixed(2).toString() + "px";
+  oppositeCathetus.style.top = (normalForce * 2).toFixed(2).toString() + "px";
+
+  f1Vector.style.width = (f1 * 2).toFixed(2).toString() + "px";
+  frictionVector.style.width = (frictionForce * 2).toFixed(2).toString() + "px";
+  gravityVector.style.height = (mg * 2).toFixed(2).toString() + "px";
+  normalVector.style.height = (normalForce * 2).toFixed(2).toString() + "px";
+  f2Vector.style.height = (normalForce * 2).toFixed(2).toString() + "px";
+}
+
+function displayVectorValues() {
+  fnValue.innerText = normalForce.toFixed(2).toString() + " N";
+  fμValue.innerText = frictionForce.toFixed(2).toString() + " N";
+  fgValue.innerText = mg.toFixed(2).toString() + " N";
+  f1Value.innerText = f1.toFixed(2).toString() + " N";
+}
+
+function animatesBoxToStartSliding() {
+  box.setAttribute("class", "box-animation");
+  boxVelocity -= planeAngle * 0.5;
+}
+
+function stopsAnimationAndResetsBoxPosition() {
+  box.removeAttribute("class", "box-animation");
+  boxVelocity = 100;
+}
+
+function handlesModelScaleBasedOnModelValues() {
   if (mass >= 0 && mass < 10) {
     scale = 0.9;
     modelFontSize = 15;
@@ -163,44 +233,7 @@ function render() {
     modelScale.style.scale = scale.toString();
     model.style.fontSize = modelFontSize.toString() + "px";
   }
-
-  //visual ratios for box-triangle
-  normalVector.style.height = ((planeWidth / 8) * 2).toString() + "px";
-
-  gravityVector.style.height = (planeHeight / 16).toString() + "px";
-
-  oppositeCathetus.style.width = f1.toFixed(2).toString() + "px";
-  oppositeCathetus.style.top = (normalForce * 2).toFixed(2).toString() + "px";
-
-  //ratios for F1 and Fμ
-  f1Vector.style.width = (f1 * 2).toFixed(2).toString() + "px";
-  frictionVector.style.width = (frictionForce * 2).toFixed(2).toString() + "px";
-  gravityVector.style.height = (mg * 2).toFixed(2).toString() + "px";
-  normalVector.style.height = (normalForce * 2).toFixed(2).toString() + "px";
-  f2Vector.style.height = (normalForce * 2).toFixed(2).toString() + "px";
-
-  //visual metric displays
-  angleValue.innerText = (57.296 * planeAngle).toFixed(2).toString() + "°";
-  fnValue.innerText = normalForce.toFixed(2).toString() + " N";
-  fμValue.innerText = frictionForce.toFixed(2).toString() + " N";
-  fgValue.innerText = mg.toFixed(2).toString() + " N";
-  f1Value.innerText = f1.toFixed(2).toString() + " N";
-
-  //model values
-  massInputField.setAttribute("placeholder", mass);
-  gravityInputField.setAttribute("placeholder", g);
-  frictionInputField.setAttribute("placeholder", frictionNumber);
-  angleInputField.setAttribute(
-    "placeholder",
-    ((180 / Math.PI) * planeAngle).toFixed(2)
-  );
-
-  maintainsGraphicalPosition();
-  handlesPieChart();
-  requestAnimationFrame(render);
 }
-render();
-
 export function maintainsGraphicalPosition() {
   if (key.up && !key.shift) {
     if (planeHeight <= 500) {
@@ -258,21 +291,7 @@ export function maintainsGraphicalPosition() {
   gravityVector.style.transform = "rotate(" + planeAngle.toString() + "rad)";
 }
 
-function handlesUserChangesToModelValues() {
-  if (userInput.mass !== null) {
-    mass = userInput.mass;
-    mg = mass * g;
-  }
-  if (userInput.g !== null) {
-    g = userInput.g;
-    mg = mass * g;
-  }
-  if (userInput.frictionNumber !== null) {
-    frictionNumber = userInput.frictionNumber;
-  }
-}
-
-function handlesPieChart() {
+function handlesVectorPieChart() {
   let combinedValue;
   let f1Ratio;
   let fμRatio;
