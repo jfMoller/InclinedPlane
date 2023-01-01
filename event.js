@@ -1,7 +1,6 @@
 import { key, userInput } from "./main.js";
 
 export function handlesKeyDown(event) {
- 
   if (event.key === "w" || event.key === "W") {
     key.up = true;
   }
@@ -11,7 +10,6 @@ export function handlesKeyDown(event) {
   if (event.key === "Shift") {
     key.shift = true;
   }
-  
 }
 export function handlesKeyUp(event) {
   if (event.key === "w" || event.key === "W") {
@@ -26,7 +24,6 @@ export function handlesKeyUp(event) {
 }
 
 export function handlesChange(event) {
-  console.log(event.target.id);
   if (event.target.id === "box-mass-input") {
     userInput.mass = parseFloat(event.target.value);
   }
