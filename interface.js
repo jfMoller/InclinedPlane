@@ -87,8 +87,8 @@ export function handlesModelScaleBasedOnModelValues(model) {
   if (model.mass >= 79 && model.mass < 100) {
     model.scale = 0.22;
     model.fontSize = 80;
-    modelScale.style.scale = scale.toString();
-    model.style.fontSize = model.fontSize.toString() + "px";
+    modelScale.style.scale = model.scale.toString();
+    modelNode.style.fontSize = model.fontSize.toString() + "px";
   }
   if (model.mass >= 100) {
     model.scale = 0.22;
