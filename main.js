@@ -1,8 +1,5 @@
 import {
-  root,
-  box,
-  plane,
-  gravityVector,
+  boxNode,
   massInputField,
   gravityInputField,
   frictionInputField,
@@ -18,35 +15,42 @@ import {
   displayVectorValues,
   handlesVectorPieChart,
 } from "./interface.js";
+import { updatesGraphicalPosition } from "./animation.js";
 
 //plane geometry
-let planeHeight = getCSSPropertyValue("--plane_height");
-let planeWidth = getCSSPropertyValue("--plane_width");
-let planeHypotenuse; //calculated dynamically
-let planeAngle; //caclculated dynamically
+let plane = {
+  height: getCSSPropertyValue("--plane_height"),
+  width: getCSSPropertyValue("--plane_width"),
+  hypotenuse: null, //calculated dynamically
+  angle: null, //caclculated dynamically
+};
 
 //box animation properties
-let boxBottom = getCSSPropertyValue("--box_bottom");
-let boxRight = getCSSPropertyValue("--box_right");
-let boxSlideBottom = getCSSPropertyValue("--box_slide_bottom");
-let boxSlideRight = getCSSPropertyValue("--box_slide_right");
-let boxVelocity = getCSSPropertyValue("--box_velocity");
-let animationDelay = getCSSPropertyValue("--animation_delay");
+let box = {
+  bottom: getCSSPropertyValue("--box_bottom"),
+  right: getCSSPropertyValue("--box_right"),
+  slideBottom: getCSSPropertyValue("--box_slide_bottom"),
+  slideRight: getCSSPropertyValue("--box_slide_right"),
+  velocity: getCSSPropertyValue("--box_velocity"),
+  animationDelay: getCSSPropertyValue("--animation_delay"),
+};
 
 //values for starting model
-let mass = 10; //kg
-let g = 9.82; //ms^2
-let frictionNumber = 0.42; //dimensionless (does not have a unit)
+let model = {
+  mass: 10, //kg
+  g: 9.82, //ms^2
+  frictionNumber: 0.42, //dimensionless (does not have a unit)
+  scale: getCSSPropertyValue("--model_scale"),
+  fontSize: getCSSPropertyValue("--model_font_size"),
+};
 
 //vector equations for when box is unmoving
-let mg = mass * g;
-let f1 = mg * Math.sin(planeAngle);
-let normalForce = mg * Math.cos(planeAngle);
-let frictionForce = frictionNumber * normalForce;
-
-//properties for model scale
-let scale = getCSSPropertyValue("--model_scale");
-let modelFontSize = getCSSPropertyValue("--model_font_size");
+let vector = {
+  mg: model.mass * model.g,
+  f1: model.mg * Math.sin(plane.angle),
+  normalForce: model.mg * Math.cos(plane.angle),
+  frictionForce: model.frictionNumber * model.normalForce,
+};
 
 //for handling user controls of model angle
 export let key = {
@@ -71,131 +75,129 @@ angleInputField.addEventListener("change", handlesChange);
 function render() {
   handlesUserInput();
 
-  updatesModelValues(mass, g, frictionNumber, planeAngle);
+  updatesModelValues(model, plane);
 
-  handlesModelScaleBasedOnModelValues(mass, scale, modelFontSize);
+  handlesModelScaleBasedOnModelValues(model);
 
   calculatesPlaneGeometryAndTrigenometry();
 
-  displaysAngleValue(planeAngle);
+  displaysAngleValue(plane.angle);
 
   calculatesVectors();
 
   updatesVectorRatios(
-    planeWidth,
-    planeHeight,
-    f1,
-    normalForce,
-    frictionForce,
-    mg
+    plane.width,
+    plane.height,
+    vector.f1,
+    vector.normalForce,
+    vector.frictionForce,
+    vector.mg
   );
 
-  displayVectorValues(normalForce, frictionForce, mg, f1);
+  displayVectorValues(
+    vector.normalForce,
+    vector.frictionForce,
+    vector.mg,
+    vector.f1
+  );
 
-  handlesVectorPieChart(f1, frictionForce);
+  handlesVectorPieChart(vector.f1, vector.frictionForce);
 
-  if (f1 > frictionForce) {
+  if (vector.f1 > vector.frictionForce) {
     animatesBoxToStartSliding();
   } else {
     stopsAnimationAndResetsBoxPosition();
   }
   maintainsGraphicalPosition();
+  updatesGraphicalPosition(
+    plane.height,
+    plane.angle,
+    box.bottom,
+    box.right,
+    box.slideBottom,
+    box.slideRight,
+    box.velocity,
+    box.animationDelay
+  );
   requestAnimationFrame(render);
 }
 render();
 
 export function handlesUserInput() {
   if (userInput.mass !== null) {
-    mass = userInput.mass;
-    mg = mass * g;
+    model.mass = userInput.mass;
+    vector.mg = model.mass * model.g;
   }
   if (userInput.g !== null) {
-    g = userInput.g;
-    mg = mass * g;
+    model.g = userInput.g;
+    vector.mg = model.mass * model.g;
   }
   if (userInput.frictionNumber !== null) {
-    frictionNumber = userInput.frictionNumber;
+    model.frictionNumber = userInput.frictionNumber;
   }
 }
 
 function calculatesPlaneGeometryAndTrigenometry() {
-  planeHypotenuse = Math.sqrt(
-    Math.pow(planeHeight, 2) + Math.pow(planeWidth, 2)
+  plane.hypotenuse = Math.sqrt(
+    Math.pow(plane.height, 2) + Math.pow(plane.width, 2)
   );
-  planeAngle = Math.asin(planeHeight / planeHypotenuse);
+  plane.angle = Math.asin(plane.height / plane.hypotenuse);
 }
 
 function calculatesVectors() {
-  f1 = mg * Math.sin(planeAngle);
-  normalForce = mg * Math.cos(planeAngle);
-  frictionForce = frictionNumber * normalForce;
+  vector.f1 = vector.mg * Math.sin(plane.angle);
+  vector.normalForce = vector.mg * Math.cos(plane.angle);
+  vector.frictionForce = model.frictionNumber * vector.normalForce;
 }
 
 function animatesBoxToStartSliding() {
-  box.setAttribute("class", "box-animation");
-  boxVelocity -= planeAngle * 0.5;
+  boxNode.setAttribute("class", "box-animation");
+  box.velocity -= plane.angle * 0.5;
 }
 
 function stopsAnimationAndResetsBoxPosition() {
-  box.removeAttribute("class", "box-animation");
-  boxVelocity = 100;
+  boxNode.removeAttribute("class", "box-animation");
+  box.velocity = 100;
 }
 
 export function maintainsGraphicalPosition() {
   if (key.up && !key.shift) {
-    if (planeHeight <= 500) {
-      planeHeight += 5;
-      boxBottom -= 0.3;
-      boxRight += 0.16;
-      boxSlideBottom += -Math.exp(2.776);
-      boxSlideRight += Math.exp(0.77);
+    if (plane.height <= 500) {
+      plane.height += 5;
+      box.bottom -= 0.3;
+      box.right += 0.16;
+      box.slideBottom += -Math.exp(2.776);
+      box.slideRight += Math.exp(0.77);
     } else {
       return;
     }
   } else if (key.up && key.shift) {
-    if (planeHeight <= 500) {
-      planeHeight += 1;
-      planeAngle = Math.asin(planeHeight / planeHypotenuse);
-      boxBottom -= 0.3 / 5;
-      boxRight += 0.16 / 5;
-      boxSlideBottom += -Math.exp(2.776) / 5;
-      boxSlideRight += Math.exp(0.77) / 5;
+    if (plane.height <= 500) {
+      plane.height += 1;
+      plane.angle = Math.asin(plane.height / plane.hypotenuse);
+      box.bottom -= 0.3 / 5;
+      box.right += 0.16 / 5;
+      box.slideBottom += -Math.exp(2.776) / 5;
+      box.slideRight += Math.exp(0.77) / 5;
     }
   } else if (key.down && !key.shift) {
-    if (planeHeight >= 40) {
-      planeHeight -= 5;
-      boxBottom -= -0.3;
-      boxRight += -0.16;
-      boxSlideBottom += Math.exp(2.776);
-      boxSlideRight += -Math.exp(0.77);
+    if (plane.height >= 40) {
+      plane.height -= 5;
+      box.bottom -= -0.3;
+      box.right += -0.16;
+      box.slideBottom += Math.exp(2.776);
+      box.slideRight += -Math.exp(0.77);
     } else {
       return;
     }
   } else if (key.down && key.shift) {
-    if (planeHeight <= 500) {
-      planeHeight -= 1;
-      planeAngle = Math.asin(planeHeight / planeHypotenuse);
-      boxBottom -= -0.3 / 5;
-      boxRight += -0.16 / 5;
-      boxSlideBottom += Math.exp(2.776) / 5;
-      boxSlideRight += -Math.exp(0.77) / 5;
+    if (plane.height <= 500) {
+      plane.height -= 1;
+      plane.angle = Math.asin(plane.height / plane.hypotenuse);
+      box.bottom -= -0.3 / 5;
+      box.right += -0.16 / 5;
+      box.slideBottom += Math.exp(2.776) / 5;
+      box.slideRight += -Math.exp(0.77) / 5;
     }
   }
-
-  plane.style.borderBottomWidth = planeHeight.toString() + "px";
-  box.style.transform = "rotate(" + -planeAngle.toString() + "rad)";
-  box.style.bottom = boxBottom.toString() + "px";
-  box.style.right = boxRight.toString() + "px";
-
-  root.style.setProperty("--box_bottom", boxBottom + "px");
-  root.style.setProperty("--box_right", boxRight + "px");
-  root.style.setProperty("--box_slide_bottom", boxSlideBottom + "px");
-  root.style.setProperty("--box_slide_right", boxSlideRight + "px");
-  root.style.setProperty("--box_velocity", boxVelocity + "s");
-  root.style.setProperty("--animation_delay", animationDelay + "s");
-
-  gravityVector.style.transform = "rotate(" + planeAngle.toString() + "rad)";
 }
-
-/*   console.log(window.getComputedStyle(root).getPropertyValue("--box_slide_bottom"));
- */

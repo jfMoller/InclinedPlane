@@ -3,6 +3,7 @@ import {
   gravityInputField,
   frictionInputField,
   angleInputField,
+  modelNode,
   modelScale,
   angleValue,
   normalVector,
@@ -18,86 +19,82 @@ import {
   pieChart,
 } from "./node.js";
 
-export function updatesModelValues(mass, g, frictionNumber, planeAngle) {
-  massInputField.setAttribute("placeholder", mass);
-  gravityInputField.setAttribute("placeholder", g);
-  frictionInputField.setAttribute("placeholder", frictionNumber);
+export function updatesModelValues(model, plane) {
+  massInputField.setAttribute("placeholder", model.mass);
+  gravityInputField.setAttribute("placeholder", model.g);
+  frictionInputField.setAttribute("placeholder", model.frictionNumber);
   angleInputField.setAttribute(
     "placeholder",
-    ((180 / Math.PI) * planeAngle).toFixed(2)
+    ((180 / Math.PI) * plane.angle).toFixed(2)
   );
 }
 
-export function handlesModelScaleBasedOnModelValues(
-  mass,
-  scale,
-  modelFontSize
-) {
-  if (mass >= 0 && mass < 10) {
-    scale = 0.9;
-    modelFontSize = 15;
-    modelScale.style.scale = scale.toString();
-    model.style.fontSize = modelFontSize.toString() + "px";
+export function handlesModelScaleBasedOnModelValues(model) {
+  if (model.mass >= 0 && model.mass < 10) {
+    model.scale = 0.9;
+    model.fontSize = 15;
+    modelScale.style.scale = model.scale.toString();
+    modelNode.style.fontSize = model.fontSize.toString() + "px";
   }
-  if (mass >= 10 && mass < 12) {
-    scale = 0.8;
-    modelFontSize = 20;
-    modelScale.style.scale = scale;
-    model.style.fontSize = modelFontSize.toString() + "px";
+  if (model.mass >= 10 && model.mass < 12) {
+    model.scale = 0.8;
+    model.fontSize = 20;
+    modelScale.style.scale = model.scale;
+    modelNode.style.fontSize = model.fontSize.toString() + "px";
   }
-  if (mass >= 12 && mass < 19) {
-    scale = 0.65;
-    modelFontSize = 25;
-    modelScale.style.scale = scale.toString();
-    model.style.fontSize = modelFontSize.toString() + "px";
+  if (model.mass >= 12 && model.mass < 19) {
+    model.scale = 0.65;
+    model.fontSize = 25;
+    modelScale.style.scale = model.scale.toString();
+    modelNode.style.fontSize = model.fontSize.toString() + "px";
   }
-  if (mass >= 19 && mass < 29) {
-    scale = 0.55;
-    modelFontSize = 30;
-    modelScale.style.scale = scale.toString();
-    model.style.fontSize = modelFontSize.toString() + "px";
+  if (model.mass >= 19 && model.mass < 29) {
+    model.scale = 0.55;
+    model.fontSize = 30;
+    modelScale.style.scale = model.scale.toString();
+    modelNode.style.fontSize = model.fontSize.toString() + "px";
   }
-  if (mass >= 29 && mass < 39) {
-    scale = 0.45;
-    modelFontSize = 35;
-    modelScale.style.scale = scale.toString();
-    model.style.fontSize = modelFontSize.toString() + "px";
+  if (model.mass >= 29 && model.mass < 39) {
+    model.scale = 0.45;
+    model.fontSize = 35;
+    modelScale.style.scale = model.scale.toString();
+    modelNode.style.fontSize = model.fontSize.toString() + "px";
   }
-  if (mass >= 39 && mass < 49) {
-    scale = 0.4;
-    modelFontSize = 40;
-    modelScale.style.scale = scale.toString();
-    model.style.fontSize = modelFontSize.toString() + "px";
+  if (model.mass >= 39 && model.mass < 49) {
+    model.scale = 0.4;
+    model.fontSize = 40;
+    modelScale.style.scale = model.scale.toString();
+    modelNode.style.fontSize = model.fontSize.toString() + "px";
   }
-  if (mass >= 49 && mass < 59) {
-    scale = 0.35;
-    modelFontSize = 45;
-    modelScale.style.scale = scale.toString();
-    model.style.fontSize = modelFontSize.toString() + "px";
+  if (model.mass >= 49 && model.mass < 59) {
+    model.scale = 0.35;
+    model.fontSize = 45;
+    modelScale.style.scale = model.scale.toString();
+    modelNode.style.fontSize = model.fontSize.toString() + "px";
   }
-  if (mass >= 59 && mass < 69) {
-    scale = 0.3;
-    modelFontSize = 50;
-    modelScale.style.scale = scale.toString();
-    model.style.fontSize = modelFontSize.toString() + "px";
+  if (model.mass >= 59 && model.mass < 69) {
+    model.scale = 0.3;
+    model.fontSize = 50;
+    modelScale.style.scale = model.scale.toString();
+    modelNode.style.fontSize = model.fontSize.toString() + "px";
   }
-  if (mass >= 69 && mass < 79) {
-    scale = 0.25;
-    modelFontSize = 70;
-    modelScale.style.scale = scale.toString();
-    model.style.fontSize = modelFontSize.toString() + "px";
+  if (model.mass >= 69 && model.mass < 79) {
+    model.scale = 0.25;
+    model.fontSize = 70;
+    modelScale.style.scale = model.scale.toString();
+    modelNode.style.fontSize = model.fontSize.toString() + "px";
   }
-  if (mass >= 79 && mass < 100) {
-    scale = 0.22;
-    modelFontSize = 80;
+  if (model.mass >= 79 && model.mass < 100) {
+    model.scale = 0.22;
+    model.fontSize = 80;
     modelScale.style.scale = scale.toString();
-    model.style.fontSize = modelFontSize.toString() + "px";
+    model.style.fontSize = model.fontSize.toString() + "px";
   }
-  if (mass >= 100) {
-    scale = 0.22;
-    modelFontSize = 90;
-    modelScale.style.scale = scale.toString();
-    model.style.fontSize = modelFontSize.toString() + "px";
+  if (model.mass >= 100) {
+    model.scale = 0.22;
+    model.fontSize = 90;
+    modelScale.style.scale = model.scale.toString();
+    modelNode.style.fontSize = model.fontSize.toString() + "px";
   }
 }
 

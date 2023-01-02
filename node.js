@@ -1,11 +1,11 @@
 //model
 export let modelScale = document.querySelector("#model-scale");
-export let model = document.querySelector("#model");
+export let modelNode = document.querySelector("#model");
 
 //shapes
 export const root = document.documentElement;
-export let box = document.querySelector("#box");
-export let plane = document.querySelector("#plane");
+export let boxNode = document.querySelector("#box");
+export let planeNode = document.querySelector("#plane");
 
 //force vectors
 export let normalVector = document.querySelector("#fn");
