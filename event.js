@@ -1,4 +1,4 @@
-import { key, userInput } from "./main.js";
+import { key, userInput } from "./model.js";
 
 export function handlesKeyDown(event) {
   if (event.key === "w" || event.key === "W") {

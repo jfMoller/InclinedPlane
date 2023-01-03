@@ -19,13 +19,29 @@ import {
   pieChart,
 } from "./node.js";
 
+export function handlesUserInput(userInput, model, vector) {
+  if (userInput.mass !== null) {
+    model.mass = userInput.mass;
+    //maintains dynamic ratio between vectors after user input
+    vector.mg = model.mass * model.g;
+  }
+  if (userInput.g !== null) {
+    model.g = userInput.g;
+    //dito
+    vector.mg = model.mass * model.g;
+  }
+  if (userInput.frictionNumber !== null) {
+    model.frictionNumber = userInput.frictionNumber;
+  }
+}
+
 export function updatesModelValues(model, plane) {
   massInputField.setAttribute("placeholder", model.mass);
   gravityInputField.setAttribute("placeholder", model.g);
   frictionInputField.setAttribute("placeholder", model.frictionNumber);
   angleInputField.setAttribute(
     "placeholder",
-    ((180 / Math.PI) * plane.angle).toFixed(2)
+    ((180 / Math.PI) * plane.angle).toFixed(2) //conversion from radians to degrees
   );
 }
 
@@ -98,47 +114,42 @@ export function handlesModelScaleBasedOnModelValues(model) {
   }
 }
 
-export function displaysAngleValue(planeAngle) {
+export function displaysAngleValue(plane) {
   return (angleValue.innerText =
-    (57.296 * planeAngle).toFixed(2).toString() + "°");
+    (57.296 * plane.angle).toFixed(2).toString() + "°");
 }
 
 export function updatesVectorRatios(
-  planeWidth,
-  planeHeight,
-  f1,
-  normalForce,
-  frictionForce,
-  mg
+  plane, vector
 ) {
-  normalVector.style.height = ((planeWidth / 8) * 2).toString() + "px";
-  gravityVector.style.height = (planeHeight / 16).toString() + "px";
-  oppositeCathetus.style.width = f1.toFixed(2).toString() + "px";
-  oppositeCathetus.style.top = (normalForce * 2).toFixed(2).toString() + "px";
+  normalVector.style.height = ((plane.width / 8) * 2).toString() + "px";
+  gravityVector.style.height = (plane.height / 16).toString() + "px";
+  oppositeCathetus.style.width = vector.f1.toFixed(2).toString() + "px";
+  oppositeCathetus.style.top = (vector.normalForce * 2).toFixed(2).toString() + "px";
   f1Vector.style.width = (f1 * 2).toFixed(2).toString() + "px";
-  frictionVector.style.width = (frictionForce * 2).toFixed(2).toString() + "px";
-  gravityVector.style.height = (mg * 2).toFixed(2).toString() + "px";
-  normalVector.style.height = (normalForce * 2).toFixed(2).toString() + "px";
-  f2Vector.style.height = (normalForce * 2).toFixed(2).toString() + "px";
+  frictionVector.style.width = (vector.frictionForce * 2).toFixed(2).toString() + "px";
+  gravityVector.style.height = (vector.mg * 2).toFixed(2).toString() + "px";
+  normalVector.style.height = (vector.normalForce * 2).toFixed(2).toString() + "px";
+  f2Vector.style.height = (vector.normalForce * 2).toFixed(2).toString() + "px";
 }
 
-export function displayVectorValues(normalForce, frictionForce, mg, f1) {
-  fnValue.innerText = normalForce.toFixed(2).toString() + " N";
-  fμValue.innerText = frictionForce.toFixed(2).toString() + " N";
-  fgValue.innerText = mg.toFixed(2).toString() + " N";
-  f1Value.innerText = f1.toFixed(2).toString() + " N";
+export function displayVectorValues(vector) {
+  fnValue.innerText = vector.normalForce.toFixed(2).toString() + " N";
+  fμValue.innerText = vector.frictionForce.toFixed(2).toString() + " N";
+  fgValue.innerText = vector.mg.toFixed(2).toString() + " N";
+  f1Value.innerText = vector.f1.toFixed(2).toString() + " N";
 }
 
-export function handlesVectorPieChart(f1, frictionForce) {
+export function handlesVectorPieChart(vector) {
   let combinedValue;
   let f1Ratio;
   let fμRatio;
   let f1Color;
   let fμColor;
 
-  combinedValue = f1 + frictionForce;
-  f1Ratio = (f1 / combinedValue) * 100;
-  fμRatio = (frictionForce / combinedValue) * 100;
+  combinedValue = vector.f1 + vector.frictionForce;
+  f1Ratio = (vector.f1 / combinedValue) * 100;
+  fμRatio = (vector.frictionForce / combinedValue) * 100;
 
   f1Color = "#59cd90";
   fμColor = "#ee6352";
