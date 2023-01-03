@@ -12,7 +12,7 @@
 }
 
 * {
-  /*   outline: solid 1px green; */
+/*    outline: solid 1px green; */
   margin: 0;
   padding: 0;
 }
@@ -37,7 +37,7 @@ main {
 #model {
   height: 100%;
   width: 100%;
- background-color: black;
+  background-color: black;
   color: white;
   font-size: var(--model_font_size);
   overflow: hidden;
@@ -59,18 +59,18 @@ article {
 
 section {
   width: 100%;
+
   display: flex;
   justify-content: center;
   align-items: flex-start;
   flex-wrap: nowrap;
   background-color: rgb(44, 44, 44);
+  outline: solid 1px rgba(0, 0, 0, 0.258);
 }
 
 #index-container {
   position: relative;
   z-index: 2;
-  margin: 0;
-  padding: 0;
   display: flex;
   flex-wrap: nowrap;
   align-items: flex-start;
@@ -78,10 +78,10 @@ section {
 }
 
 #index-container input {
-  width: 50px;
+  width: 70px;
   background-color: rgba(119, 136, 153, 0.288);
   border: none;
-  outline: solid 1px rgba(0, 0, 0, 0.304);
+  outline: solid 1px transparent;
   color: white;
   text-align: center;
 }
@@ -90,36 +90,53 @@ input::placeholder {
   color: white;
 }
 
+input[type=number]::-webkit-inner-spin-button {
+  opacity: 1
+}
+
 .value-table {
   color: white;
+}
 
+#results {
+  min-width: 200px;
+}
+
+
+table {
+/* border-collapse: collapse;
+outline: solid 1px transparent; */
 }
 
 thead {
   background-color: rgba(119, 136, 153, 0.288);
+  outline: solid 1px rgba(0, 0, 0, 0.258);
 }
 
 tbody {
   background-color: rgba(99, 99, 99, 0.171);
+  text-align: left;
+}
+
+th {
+  padding: 5px;
 }
 
 td {
   padding: 10px;
+  outline: solid 1px rgba(0, 0, 0, 0.258);
 }
 
-tbody {
-  text-align: left;
-}
 
 .pie-chart {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
   padding: 10px;
-  outline: solid 1px rgba(0, 0, 0, 0.1);
+
 }
 
 #slide-pie-chart {
+  width: 125px;
+  height: 125px;
+  border-radius: 50%;
   background-image: conic-gradient(#3fa7d6 0 50%, #59cd90 0 50%);
 }
 
@@ -134,9 +151,6 @@ tbody {
 #angle {
   position: relative;
   z-index: 1;
-  border-radius: 50%;
-  height: 100px;
-  width: 100px;
   display: flex;
   align-items: flex-end;
   justify-content: center;

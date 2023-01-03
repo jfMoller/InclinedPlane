@@ -73,6 +73,9 @@ export function adjustsModelScaleBasedOnModelValues(model) {
 }
 
 export function displaysAngleValue(plane) {
+  //updates position in relation to plane surface
+  angleValue.style.top = (plane.height / 2).toString() + "px";
+
   return (angleValue.innerText =
     convertsAngleFromRadiansToDegreesWithTheseAmountOfDecimals(
       plane.angle,
