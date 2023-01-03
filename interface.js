@@ -18,6 +18,7 @@ import {
   f1Value,
   pieChart,
 } from "./node.js";
+import { convertsAngleFromRadiansToDegreesWithTheseAmountOfDecimals } from "./utility.js";
 
 export function handlesUserInput(userInput, model, vector) {
   if (userInput.mass !== null) {
@@ -41,95 +42,61 @@ export function updatesModelValues(model, plane) {
   frictionInputField.setAttribute("placeholder", model.frictionNumber);
   angleInputField.setAttribute(
     "placeholder",
-    ((180 / Math.PI) * plane.angle).toFixed(2) //conversion from radians to degrees
+    convertsAngleFromRadiansToDegreesWithTheseAmountOfDecimals(plane.angle, 2)
   );
 }
 
-export function handlesModelScaleBasedOnModelValues(model) {
-  if (model.mass >= 0 && model.mass < 10) {
-    model.scale = 0.9;
-    model.fontSize = 15;
-    modelScale.style.scale = model.scale.toString();
-    modelNode.style.fontSize = model.fontSize.toString() + "px";
-  }
-  if (model.mass >= 10 && model.mass < 12) {
-    model.scale = 0.8;
-    model.fontSize = 20;
-    modelScale.style.scale = model.scale;
-    modelNode.style.fontSize = model.fontSize.toString() + "px";
-  }
-  if (model.mass >= 12 && model.mass < 19) {
-    model.scale = 0.65;
-    model.fontSize = 25;
-    modelScale.style.scale = model.scale.toString();
-    modelNode.style.fontSize = model.fontSize.toString() + "px";
-  }
-  if (model.mass >= 19 && model.mass < 29) {
-    model.scale = 0.55;
-    model.fontSize = 30;
-    modelScale.style.scale = model.scale.toString();
-    modelNode.style.fontSize = model.fontSize.toString() + "px";
-  }
-  if (model.mass >= 29 && model.mass < 39) {
-    model.scale = 0.45;
-    model.fontSize = 35;
-    modelScale.style.scale = model.scale.toString();
-    modelNode.style.fontSize = model.fontSize.toString() + "px";
-  }
-  if (model.mass >= 39 && model.mass < 49) {
-    model.scale = 0.4;
-    model.fontSize = 40;
-    modelScale.style.scale = model.scale.toString();
-    modelNode.style.fontSize = model.fontSize.toString() + "px";
-  }
-  if (model.mass >= 49 && model.mass < 59) {
-    model.scale = 0.35;
-    model.fontSize = 45;
-    modelScale.style.scale = model.scale.toString();
-    modelNode.style.fontSize = model.fontSize.toString() + "px";
-  }
-  if (model.mass >= 59 && model.mass < 69) {
-    model.scale = 0.3;
-    model.fontSize = 50;
-    modelScale.style.scale = model.scale.toString();
-    modelNode.style.fontSize = model.fontSize.toString() + "px";
-  }
-  if (model.mass >= 69 && model.mass < 79) {
-    model.scale = 0.25;
-    model.fontSize = 70;
-    modelScale.style.scale = model.scale.toString();
-    modelNode.style.fontSize = model.fontSize.toString() + "px";
-  }
-  if (model.mass >= 79 && model.mass < 100) {
-    model.scale = 0.22;
-    model.fontSize = 80;
-    modelScale.style.scale = model.scale.toString();
-    modelNode.style.fontSize = model.fontSize.toString() + "px";
+export function adjustsModelScaleBasedOnModelValues(model) {
+  //hard coded to ensure model readability
+  let minMasses = [0, 10, 12, 19, 29, 39, 49, 59, 69, 79];
+  let maxMasses = [12, 19, 29, 39, 49, 59, 69, 79, 79, 100];
+  let scales = [0.9, 0.8, 0.65, 0.55, 0.45, 0.4, 0.35, 0.3, 0.25, 0.22];
+  let fontSizes = [15, 20, 25, 30, 35, 40, 45, 50, 70, 80];
+
+  for (let i = 0; i < 10; i++) {
+    let minMass = minMasses[i];
+    let maxMass = maxMasses[i];
+    let scale = scales[i];
+    let fontSize = fontSizes[i];
+
+    if (model.mass >= minMass && model.mass < maxMass) {
+      model.scale = scale;
+      model.fontSize = fontSize;
+    }
   }
   if (model.mass >= 100) {
     model.scale = 0.22;
     model.fontSize = 90;
-    modelScale.style.scale = model.scale.toString();
-    modelNode.style.fontSize = model.fontSize.toString() + "px";
   }
+  modelScale.style.scale = model.scale.toString();
+  modelNode.style.fontSize = model.fontSize.toString() + "px";
 }
 
 export function displaysAngleValue(plane) {
   return (angleValue.innerText =
-    (57.296 * plane.angle).toFixed(2).toString() + "°");
+    convertsAngleFromRadiansToDegreesWithTheseAmountOfDecimals(
+      plane.angle,
+      2
+    ).toString() + "°");
 }
 
-export function updatesVectorRatios(
-  plane, vector
-) {
+export function updatesVectorRatios(plane, vector) {
   normalVector.style.height = ((plane.width / 8) * 2).toString() + "px";
+
   gravityVector.style.height = (plane.height / 16).toString() + "px";
+
   oppositeCathetus.style.width = vector.f1.toFixed(2).toString() + "px";
-  oppositeCathetus.style.top = (vector.normalForce * 2).toFixed(2).toString() + "px";
-  f1Vector.style.width = (f1 * 2).toFixed(2).toString() + "px";
-  frictionVector.style.width = (vector.frictionForce * 2).toFixed(2).toString() + "px";
+  oppositeCathetus.style.top =
+    (vector.normalForce * 2).toFixed(2).toString() + "px";
+
+  f1Vector.style.width = (vector.f1 * 2).toFixed(2).toString() + "px";
+  frictionVector.style.width =
+    (vector.frictionForce * 2).toFixed(2).toString() + "px";
+
   gravityVector.style.height = (vector.mg * 2).toFixed(2).toString() + "px";
-  normalVector.style.height = (vector.normalForce * 2).toFixed(2).toString() + "px";
+  normalVector.style.height =
+    (vector.normalForce * 2).toFixed(2).toString() + "px";
+
   f2Vector.style.height = (vector.normalForce * 2).toFixed(2).toString() + "px";
 }
 
@@ -142,24 +109,21 @@ export function displayVectorValues(vector) {
 
 export function handlesVectorPieChart(vector) {
   let combinedValue;
-  let f1Ratio;
   let fμRatio;
   let f1Color;
   let fμColor;
 
   combinedValue = vector.f1 + vector.frictionForce;
-  f1Ratio = (vector.f1 / combinedValue) * 100;
   fμRatio = (vector.frictionForce / combinedValue) * 100;
-
   f1Color = "#59cd90";
   fμColor = "#ee6352";
 
-  pieChart.style.backgroundImage = //only winRatio is needed for the chart
+  pieChart.style.backgroundImage = //only fμRatio is required for the chart
     "conic-gradient(" +
     fμColor +
     " 0 " +
-    fμRatio.toString() + //the % of winning
+    fμRatio.toString() + //the size of the fμ Ratio in %
     "%," +
     f1Color +
-    " 0 100%)"; //the remaining % amount illustrates the % of losing
+    " 0 100%)"; //the remaining % illustrates the f1 ratio
 }

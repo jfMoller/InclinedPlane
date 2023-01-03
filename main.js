@@ -1,16 +1,16 @@
 import {
   handlesUserInput,
   updatesModelValues,
-  handlesModelScaleBasedOnModelValues,
+  adjustsModelScaleBasedOnModelValues,
   displaysAngleValue,
   updatesVectorRatios,
   displayVectorValues,
   handlesVectorPieChart,
 } from "./interface.js";
 import {
-  calculatesPlaneGeometryAndTrigenometry,
   calculatesVectors,
   calculatesGraphicalPosition,
+  calculatesPlaneHypotenuseAndAngle,
 } from "./math.js";
 import {
   updatesGraphicalPosition,
@@ -24,9 +24,9 @@ function rendersModelEveryFrame() {
 
   updatesModelValues(model, plane);
 
-  handlesModelScaleBasedOnModelValues(model);
+  adjustsModelScaleBasedOnModelValues(model);
 
-  calculatesPlaneGeometryAndTrigenometry(plane);
+  calculatesPlaneHypotenuseAndAngle(plane);
 
   displaysAngleValue(plane);
 
