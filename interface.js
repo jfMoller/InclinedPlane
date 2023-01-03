@@ -18,7 +18,7 @@ import {
   f1Value,
   pieChart,
 } from "./node.js";
-import { convertsAngleFromRadiansToDegreesWithTheseAmountOfDecimals } from "./utility.js";
+import { convertsAngleFromRadiansToDegreesWithTheseAmountOfDecimals } from "./utility1.js";
 
 export function handlesUserInput(userInput, model, vector) {
   if (userInput.mass !== null) {
