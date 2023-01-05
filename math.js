@@ -41,7 +41,7 @@ export function calculatesGraphicalPosition(key, plane, box) {
       return;
     }
   } else if (key.down && key.shift) {
-    if (plane.height <= 500) {
+    if (plane.height >= 40) {
       plane.height += -1;
       box.bottom += (0.3 / 5);
       box.right += -(0.16 / 5);
