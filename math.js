@@ -43,7 +43,7 @@ export function calculatesGraphicalPosition(key, plane, box) {
   } else if (key.down && key.shift) {
     if (plane.height <= 500) {
       plane.height += -1;
-      box.bottom += -(0.3 / 5);
+      box.bottom += (0.3 / 5);
       box.right += -(0.16 / 5);
       box.slideBottom += (Math.exp(2.776) / 5);
       box.slideRight += -(Math.exp(0.77) / 5);
