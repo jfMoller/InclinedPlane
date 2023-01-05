@@ -8,9 +8,9 @@ The height/angle of the plane can be changed with the [W] & [S] keys, [Shift] ca
 
 ## constraints:
 Were used as an attempt to maintain fidelity and visibility of the model.
-Box mass (m): 0-100 kg,
-Gravitational acceleration (g): 9.82 – 13.59 ms^2,
-Coefficient of friction (μ): 0-4 (dimensionless – no unit)
+* Box mass (m): 0-100 kg
+* Gravitational acceleration (g): 9.82 – 13.59 ms^2,
+* Coefficient of friction (μ): 0-4 (dimensionless – no unit)
 
 ## more about the inclined plane
 https://www.khanacademy.org/science/physics/forces-newtons-laws/inclined-planes-friction/v/inclined-plane-force-components
